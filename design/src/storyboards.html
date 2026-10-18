@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Emerald storyboards</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { width: 1600px; padding: 48px 56px 56px; background: #f6f2e8; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+  .head h1 { font: 800 44px/1.05 var(--display); margin: 0; letter-spacing: -0.02em; }
+  .head .tag { font: 600 15px var(--body); color: var(--muted); }
+  .persona { display: flex; gap: 14px; align-items: center; margin: 14px 0 28px; padding: 14px 18px; background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--r); font-size: 17px; }
+  .persona .av { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 700 17px var(--display); color: #fff; background: var(--emerald); flex: none; }
+  .persona b { font-weight: 800; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .panel { background: var(--surface); border: 2px solid var(--wire-ink); border-radius: 6px; padding: 16px 18px 18px; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,.08); }
+  .num { position: absolute; top: -14px; left: -14px; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; font: 800 17px var(--display); display: grid; place-items: center; }
+  .stage { height: 380px; background: repeating-linear-gradient(0deg, transparent 0 23px, #f1eee6 23px 24px); border-radius: 4px; display: grid; place-items: center; position: relative; overflow: hidden; }
+  .cap { margin-top: 14px; }
+  .cap h3 { margin: 0 0 4px; font: 800 20px/1.2 var(--display); }
+  .cap p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); }
+
+  /* devices */
+  .phone { width: 196px; height: 352px; border: 2.5px solid var(--wire-ink); border-radius: 26px; background: #fff; padding: 22px 10px 10px; position: relative; display: flex; flex-direction: column; gap: 7px; overflow: hidden; }
+  .phone::before { content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 54px; height: 6px; border-radius: 4px; background: var(--wire-ink); }
+  .laptop { width: 400px; display: flex; flex-direction: column; align-items: center; }
+  .laptop .scr { width: 380px; height: 250px; border: 2.5px solid var(--wire-ink); border-radius: 10px 10px 2px 2px; background: #fff; padding: 10px; display: flex; flex-direction: column; gap: 7px; overflow: hidden; }
+  .laptop .base { width: 420px; height: 12px; border: 2.5px solid var(--wire-ink); border-radius: 2px 2px 10px 10px; background: var(--wire-fill); }
+  .extra { position: absolute; }
+
+  /* sketch UI */
+  .bar { display: flex; align-items: center; justify-content: space-between; font: 800 12px var(--display); padding-bottom: 5px; border-bottom: 1.5px solid var(--wire-mid); }
+  .bar i { font-style: normal; width: 16px; height: 16px; border-radius: 50%; background: var(--wire-mid); }
+  .hero { background: var(--wire-fill); border: 1.5px solid var(--wire-ink); border-radius: 8px; padding: 8px; font: 800 12px var(--display); }
+  .hero small { display: block; font: 500 9.5px var(--body); color: #555; margin-top: 3px; }
+  .hero .ph { height: 34px; border-radius: 5px; background: repeating-linear-gradient(45deg, #d6d6d6 0 5px, #e6e6e6 5px 10px); margin-top: 5px; }
+  .card { border: 1.5px solid var(--wire-ink); border-radius: 8px; padding: 6px 7px; font: 700 10.5px var(--body); background: #fff; }
+  .card small { display: block; font-weight: 500; font-size: 9px; color: #666; margin-top: 2px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+  .chip { font: 600 8.5px var(--body); padding: 2px 6px; border-radius: 99px; border: 1.2px solid var(--wire-ink); background: #fff; }
+  .row { display: flex; gap: 7px; align-items: center; font: 700 10.5px var(--body); }
+  .row small { display: block; font-weight: 500; font-size: 9px; color: #666; }
+  .av { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--wire-ink); background: var(--wire-fill); display: grid; place-items: center; font: 800 9px var(--display); flex: none; }
+  .btn { text-align: center; font: 800 11px var(--body); padding: 7px; border-radius: 8px; border: 1.5px solid var(--wire-ink); background: #fff; }
+  .btn.primary { background: var(--wire-ink); color: #fff; }
+  .lines span { display: block; height: 6px; border-radius: 3px; background: var(--wire-mid); margin: 4px 0; }
+  .lines span:last-child { width: 62%; }
+  .input { border: 1.5px solid var(--wire-ink); border-radius: 7px; padding: 5px 7px; font: 500 9.5px var(--body); color: #333; }
+  .input label { display: block; font: 800 8.5px var(--body); text-transform: uppercase; letter-spacing: .04em; color: #777; margin-bottom: 2px; }
+  .tabs { display: flex; gap: 4px; font: 700 9.5px var(--body); }
+  .tabs span { padding: 3px 7px; border-radius: 99px; border: 1.2px solid var(--wire-mid); color: #666; }
+  .tabs span.on { border-color: var(--wire-ink); background: var(--wire-ink); color: #fff; }
+  .grid4 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .grid4 .card { text-align: center; padding: 6px 3px; font-size: 9px; }
+  .grid4 .av { margin: 0 auto 3px; }
+  .toast { border-radius: 8px; padding: 7px 8px; font: 800 10.5px var(--body); background: var(--emerald); color: #fff; display: flex; gap: 6px; align-items: center; }
+  .toast.gold { background: var(--gold-soft); color: var(--gold-ink); border: 1.5px solid var(--gold); }
+  .medal { margin: 6px auto 2px; width: 92px; height: 92px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f6dc9a, var(--gold) 70%); border: 3px solid var(--gold-ink); display: grid; place-items: center; font-size: 38px; }
+  .center { text-align: center; font: 800 13px var(--display); }
+  .center small { display: block; font: 500 9.5px var(--body); color: #666; margin-top: 3px; }
+  .modal { position: absolute; inset: auto 8px 8px 8px; border: 2px solid var(--wire-ink); border-radius: 12px; background: #fff; padding: 9px; box-shadow: 0 -40px 0 40px rgba(0,0,0,.18); display: flex; flex-direction: column; gap: 6px; font: 800 11px var(--display); }
+  .modal p { margin: 0; font: 500 9.5px/1.35 var(--body); color: #444; }
+  .modal .two { display: flex; gap: 5px; }
+  .modal .two .btn { flex: 1; font-size: 9.5px; padding: 6px 3px; }
+  .lb { display: flex; flex-direction: column; gap: 4px; }
+  .lb div { display: flex; justify-content: space-between; align-items: center; font: 700 10px var(--body); padding: 4px 6px; border-radius: 6px; border: 1.2px solid var(--wire-mid); }
+  .lb div.you { border: 1.8px solid var(--emerald); background: var(--emerald-soft); }
+  .lb b { font-family: var(--display); }
+  .notif { display: flex; gap: 6px; align-items: center; border: 1.5px solid var(--wire-ink); border-radius: 10px; padding: 6px 7px; font: 700 9.5px/1.3 var(--body); background: #fff; }
+  .wa { background: #e7f6e0; border-radius: 8px 8px 8px 2px; padding: 6px 8px; font: 500 9.5px/1.35 var(--body); max-width: 86%; border: 1.2px solid #bcd9b0; }
+  .wa u { color: var(--blue-ink); }
+  .code { background: #1f2622; color: #cfe9dc; border-radius: 7px; padding: 6px 7px; font: 500 8.5px/1.5 var(--mono); }
+  .spacer { flex: 1; }
+
+  /* highlight + annotation */
+  .hl { outline: 2.5px solid var(--emerald); outline-offset: 2px; background: var(--emerald-soft); }
+  .btn.primary.hl { background: var(--emerald); border-color: var(--emerald); }
+  .tap { position: absolute; width: 30px; height: 30px; border-radius: 50%; border: 3px solid var(--emerald); background: rgba(15,123,90,.18); pointer-events: none; }
+  .note { position: absolute; font: 700 20px/1.05 var(--hand); color: var(--emerald-ink); width: 108px; }
+  .note.left { left: 8px; text-align: left; }
+  .note.right { right: 8px; text-align: right; }
+  .note::after { content: ""; display: block; width: 46px; height: 2px; background: var(--emerald-ink); margin-top: 6px; }
+  .note.right::after { margin-left: auto; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const el = {
+  bar: (o) => `<div class="bar">${o.text}<i></i></div>`,
+  hero: (o) => `<div class="hero ${o.hl ? "hl" : ""}">${o.text}<small>${o.sub || ""}</small>${o.ph === false ? "" : '<div class="ph"></div>'}</div>`,
+  card: (o) => `<div class="card ${o.hl ? "hl" : ""}">${o.title}${o.sub ? `<small>${o.sub}</small>` : ""}${o.chips ? `<div class="chips">${o.chips.map((c) => `<span class="chip">${c}</span>`).join("")}</div>` : ""}</div>`,
+  row: (o) => `<div class="row ${o.hl ? "hl" : ""}"><span class="av">${o.av}</span><div>${o.title}<small>${o.sub || ""}</small></div></div>`,
+  btn: (o) => `<div class="btn ${o.primary ? "primary" : ""} ${o.hl ? "hl" : ""}">${o.text}</div>`,
+  chips: (o) => `<div class="chips">${o.items.map((c, i) => `<span class="chip ${o.on === i ? "hl" : ""}">${c}</span>`).join("")}</div>`,
+  lines: (o) => `<div class="lines">${"<span></span>".repeat(o.n || 3)}</div>`,
+  input: (o) => `<div class="input ${o.hl ? "hl" : ""}"><label>${o.label}</label>${o.value}</div>`,
+  tabs: (o) => `<div class="tabs">${o.items.map((t, i) => `<span class="${i === o.on ? "on" : ""}">${t}</span>`).join("")}</div>`,
+  grid: (o) => `<div class="grid4">${o.items.map(([av, n, hl]) => `<div class="card ${hl ? "hl" : ""}"><span class="av">${av}</span>${n}</div>`).join("")}</div>`,
+  toast: (o) => `<div class="toast ${o.kind || ""}">${o.text}</div>`,
+  medal: (o) => `<div class="medal">${o.icon}</div><div class="center">${o.text}<small>${o.sub}</small></div>`,
+  center: (o) => `<div class="center">${o.text}<small>${o.sub || ""}</small></div>`,
+  modal: (o) => `<div class="modal">${o.title}<p>${o.body}</p><div class="two">${o.btns.map((b, i) => `<div class="btn ${i === 0 ? "primary hl" : ""}">${b}</div>`).join("")}</div></div>`,
+  lb: (o) => `<div class="lb">${o.rows.map(([r, n, p, you]) => `<div class="${you ? "you" : ""}"><span>${r}&nbsp; ${n}</span><b>${p}</b></div>`).join("")}</div>`,
+  notif: (o) => `<div class="notif ${o.hl ? "hl" : ""}"><span class="av">${o.av}</span><span>${o.text}</span></div>`,
+  wa: (o) => `<div class="wa">${o.text}</div>`,
+  code: (o) => `<div class="code">${o.text}</div>`,
+  spacer: () => `<div class="spacer"></div>`,
+};
+const render = (items) => items.map((i) => el[i.t](i)).join("");
+
+function device(p) {
+  const taps = (p.taps || []).map(([x, y]) => `<span class="tap" style="left:${x - 15}px;top:${y - 15}px"></span>`).join("");
+  const inner = render(p.ui) + taps;
+  const body = p.device === "laptop"
+    ? `<div class="laptop"><div class="scr">${inner}</div><div class="base"></div></div>`
+    : `<div class="phone">${inner}${p.overlay ? render(p.overlay) : ""}</div>`;
+  const note = p.note ? `<div class="note ${p.note.side || "left"}" style="top:${p.note.y || 40}px">${p.note.text}</div>` : "";
+  return `<div class="stage">${body}${note}</div>`;
+}
+
+const boards = [
+  {
+    file: "01-discover",
+    title: "Find who's building what",
+    tag: "Storyboard 1 of 4 · discover",
+    persona: ["B", "<b>Bilal</b>, a newer member. Codes a little and wants to see what the others are making and how they did it."],
+    panels: [
+      { title: "A link in the group chat", text: "Mohamed posts the Emerald link in WhatsApp. One tap, sign in with GitHub or email. No setup.", note: { text: "one tap, no app store", side: "right", y: 60 },
+        ui: [{ t: "bar", text: "Dev Bros 💬" }, { t: "wa", text: "Salam all, everything we build now lives here 👇" }, { t: "wa", text: "<u>emerald.devbros.uk</u>" }, { t: "spacer" }, { t: "btn", text: "Continue with GitHub", primary: true, hl: true }, { t: "btn", text: "Use email instead" }], taps: [[160, 300]] },
+      { title: "Home shows what's happening", text: "Project of the Month at the top, then this week's top builders and a feed of launches and new learnings.",
+        ui: [{ t: "bar", text: "Emerald" }, { t: "hero", text: "⭐ Project of the Month", sub: "Salah Buddy · Yusuf", hl: true }, { t: "lb", rows: [["1", "Yusuf", "86"], ["2", "Ibrahim", "61"], ["3", "Mohamed", "54"]] }, { t: "row", av: "Z", title: "Zayd wrote a learning", sub: "SwiftUI widgets the easy way" }, { t: "row", av: "H", title: "Hamza launched Receipt Snap", sub: "React Native · Claude API" }], note: { text: "Spotlight first", side: "left", y: 50 } },
+      { title: "Browse the builders", text: "Everyone in one grid. Bilal filters by Flutter to find people using his stack.",
+        ui: [{ t: "bar", text: "Builders" }, { t: "chips", items: ["All", "Flutter", "React", "Next.js", "Launched"], on: 1 }, { t: "grid", items: [["Y", "Yusuf", true], ["I", "Ibrahim"], ["M", "Mohamed"], ["Z", "Zayd"], ["H", "Hamza"], ["ID", "Idris"]] }, { t: "lines", n: 2 }], taps: [[118, 112]] },
+      { title: "A profile at a glance", text: "Yusuf's profile: what he's building now, what he's finished, badges and his learnings.",
+        ui: [{ t: "bar", text: "Yusuf" }, { t: "center", text: "Yusuf", sub: "Flutter · Firebase · 6-week streak" }, { t: "chips", items: ["🚀 First launch", "🤝 Helped 5", "⭐ POTM"] }, { t: "tabs", items: ["Building", "Done", "Learnings"], on: 1 }, { t: "card", title: "Salah Buddy", sub: "Launched · prayer-times widget", chips: ["Flutter", "Firebase"], hl: true }, { t: "card", title: "Quran Tracker", sub: "Completed" }], taps: [[110, 228]] },
+      { title: "Open the app, read the story", text: "Open app runs the live app. Under it: the stack, the GitHub link and Yusuf's own write-up of what he learned.", note: { text: "real app, real lessons", side: "right", y: 50 },
+        ui: [{ t: "bar", text: "Salah Buddy" }, { t: "hero", text: "Salah Buddy", sub: "by Yusuf · Launched Sep 2026" }, { t: "btn", text: "Open app ↗", primary: true, hl: true }, { t: "chips", items: ["Flutter", "Firebase", "Riverpod", "GitHub ↗"] }, { t: "card", title: "What I learned", sub: "Background fetch on iOS is strict, so I…" }, { t: "lines", n: 2 }], taps: [[110, 162]] },
+      { title: "Ask the builder", text: "On the AMA tab Bilal asks how the widget refreshes. Yusuf gets a notification and answers.",
+        ui: [{ t: "bar", text: "Salah Buddy · AMA" }, { t: "tabs", items: ["About", "Updates", "AMA 4"], on: 2 }, { t: "card", title: "How do you refresh the widget at prayer time?", sub: "Bilal · just now" }, { t: "card", title: "Do you cache the times offline?", sub: "Idris · ✅ answered" }, { t: "spacer" }, { t: "input", label: "Ask Yusuf", value: "Type your question…", hl: true }] },
+    ],
+  },
+  {
+    file: "02-ship-and-share",
+    title: "Ship it and share what you learned",
+    tag: "Storyboard 2 of 4 · builder",
+    persona: ["Y", "<b>Yusuf</b>, a builder. He's busy and won't do admin. He wants his work to show up with almost no effort."],
+    panels: [
+      { title: "Connect GitHub once", text: "Tick the repos to show. Emerald fills in the name, description, languages and app link by itself.", note: { text: "do this once, never again", side: "right", y: 44 },
+        ui: [{ t: "bar", text: "Link your projects" }, { t: "card", title: "☑ salah-buddy", sub: "Dart · updated 2h ago", hl: true }, { t: "card", title: "☑ quran-tracker", sub: "Dart · updated 3 wks ago" }, { t: "card", title: "☐ dotfiles", sub: "Shell" }, { t: "spacer" }, { t: "btn", text: "Show 2 projects", primary: true }] },
+      { title: "The project page builds itself", text: "Stack chips from languages, a summary from the README, the Open app button from the homepage URL.",
+        ui: [{ t: "bar", text: "Salah Buddy" }, { t: "hero", text: "Salah Buddy", sub: "from README: Prayer times on your home screen" }, { t: "chips", items: ["Flutter ✓", "Firebase ✓", "+ add"] }, { t: "input", label: "App link (from GitHub)", value: "salahbuddy.app", hl: true }, { t: "card", title: "Updates", sub: "12 coding days synced" }], note: { text: "auto-filled", side: "left", y: 160 } },
+      { title: "Mark it launched", text: "He switches the status from Building to Launched. Emerald checks that the link really opens.",
+        ui: [{ t: "bar", text: "Status" }, { t: "card", title: "○ Building" }, { t: "card", title: "● Launched", sub: "Public app link works ✓", hl: true }, { t: "card", title: "○ Completed", sub: "finished, not live" }, { t: "spacer" }, { t: "btn", text: "Save", primary: true }], taps: [[108, 104]] },
+      { title: "Write the learning in his own words", text: "A short guided form: what you built, what you used, what went wrong, what you'd do again.",
+        ui: [{ t: "bar", text: "What I learned" }, { t: "input", label: "Techniques I used", value: "Riverpod, home widgets, FCM" }, { t: "input", label: "What went wrong", value: "iOS kills background tasks, so…" }, { t: "input", label: "I'd do differently", value: "Start with the widget, not the app" }, { t: "spacer" }, { t: "btn", text: "Publish learning", primary: true, hl: true }] },
+      { title: "A gentle check, not a detector", text: "He pasted a big block, so Emerald asks once. Posts written in the editor show a Written here mark.", note: { text: "trust + nudge, no accusations", side: "right", y: 40 },
+        ui: [{ t: "bar", text: "What I learned" }, { t: "lines", n: 4 }, { t: "lines", n: 3 }], overlay: [{ t: "modal", title: "Is this in your own words?", body: "Learnings are for what <i>you</i> found out. AI-written posts aren't allowed.", btns: ["Yes, it's mine", "Let me rewrite"] }] },
+      { title: "Badge unlocked", text: "First App Launched (+50). The launch goes to the Home feed and he moves up the weekly board.",
+        ui: [{ t: "bar", text: "" }, { t: "medal", icon: "🚀", text: "First App Launched", sub: "Permanent badge · +50 pts" }, { t: "spacer" }, { t: "toast", text: "↑ You're now #1 this week" }, { t: "btn", text: "Share to the group" }] },
+    ],
+  },
+  {
+    file: "03-non-tech",
+    title: "Contribute without writing code",
+    tag: "Storyboard 3 of 4 · non-tech member",
+    persona: ["A", "<b>Ahmed</b> doesn't code but follows tech news closely. He wants to take part and be counted."],
+    panels: [
+      { title: "He finds a good article", text: "Ahmed reads a piece about a new AI coding tool and thinks the builders would find it useful.",
+        ui: [{ t: "bar", text: "theverge.com" }, { t: "hero", text: "New AI agents can now ship whole apps", sub: "Tech · 6 min read" }, { t: "lines", n: 4 }, { t: "lines", n: 3 }, { t: "spacer" }, { t: "btn", text: "Share ↗", hl: true }], taps: [[110, 316]] },
+      { title: "One big + button", text: "Every screen has the same + button: share an article, write a learning, add a snippet, ask a question.", note: { text: "same button everywhere", side: "right", y: 50 },
+        ui: [{ t: "bar", text: "Emerald" }, { t: "lines", n: 3 }], overlay: [{ t: "modal", title: "What do you want to add?", body: "📰 Share an article<br>✍️ Write a learning<br>🧩 Add a snippet<br>❓ Ask a question", btns: ["📰 Share article", "Cancel"] }] },
+      { title: "Paste the link, add his take", text: "The title and image fill in by themselves. He adds one or two lines on why it matters, in his own words.",
+        ui: [{ t: "bar", text: "Share an article" }, { t: "input", label: "Link", value: "theverge.com/ai-agents-ship…" }, { t: "card", title: "New AI agents can now ship whole apps", sub: "The Verge · preview" }, { t: "input", label: "Your take (required)", value: "Worth trying for our next hackathon, the free tier is enough", hl: true }, { t: "spacer" }, { t: "btn", text: "Share", primary: true }] },
+      { title: "It counts", text: "+5 points. Articles appear in Learn under News, so builders find them alongside the learnings.",
+        ui: [{ t: "bar", text: "Learn" }, { t: "toast", text: "+5 · Article shared" }, { t: "tabs", items: ["All", "Learnings", "News", "Opinions"], on: 2 }, { t: "card", title: "New AI agents can now ship whole apps", sub: "Ahmed: Worth trying for our next…", hl: true }, { t: "card", title: "Apple opens widget APIs", sub: "Idris · 2 days ago" }] },
+      { title: "The builders react", text: "Hamza replies that he'll try it on Receipt Snap. Ahmed gets a notification, and the post goes into the weekly recap.",
+        ui: [{ t: "bar", text: "Notifications" }, { t: "notif", av: "H", text: "Hamza: going to try this on Receipt Snap 👀", hl: true }, { t: "notif", av: "Y", text: "Yusuf saved your article" }, { t: "notif", av: "E", text: "Your post is in this week's recap" }] },
+      { title: "On the board", text: "Three weeks in a row earns him the 4-Week Streak badge track. He sits on the same leaderboard as the coders.", note: { text: "everyone counts", side: "left", y: 50 },
+        ui: [{ t: "bar", text: "This week" }, { t: "lb", rows: [["1", "Yusuf", "86"], ["2", "Ibrahim", "61"], ["3", "Mohamed", "54"], ["4", "Ahmed", "35", true], ["5", "Zayd", "30"]] }, { t: "toast", kind: "gold", text: "🔥 3 weeks in a row: 1 more for a badge" }] },
+    ],
+  },
+  {
+    file: "04-help-a-bro",
+    title: "Help a bro, get the credit",
+    tag: "Storyboard 4 of 4 · helping + snippets",
+    persona: ["I", "<b>Ibrahim</b>, an experienced builder. He's happy to help, and Emerald makes that help visible and reusable."],
+    panels: [
+      { title: "Unanswered questions surface", text: "Home has a quiet \"Can you help?\" card showing open AMA questions that match Ibrahim's stack.", device: "laptop",
+        ui: [{ t: "bar", text: "Emerald · Home" }, { t: "hero", text: "⭐ Project of the Month: Salah Buddy", ph: false }, { t: "card", title: "🙋 Can you help? 2 open questions in Next.js", sub: "Bilal: How do I protect admin routes in Masjid Rota?", hl: true }, { t: "lines", n: 2 }], note: { text: "matched to his stack", side: "right", y: 2 } },
+      { title: "He answers on the project", text: "He answers Bilal's question on Masjid Rota's AMA, with a short code block.",
+        ui: [{ t: "bar", text: "Masjid Rota · AMA" }, { t: "card", title: "How do I protect admin routes?", sub: "Bilal" }, { t: "code", text: "export function middleware(req) {<br>&nbsp;&nbsp;if (!isAdmin(req)) return deny()<br>}" }, { t: "lines", n: 2 }, { t: "spacer" }, { t: "btn", text: "Post answer", primary: true, hl: true }] },
+      { title: "Marked helpful", text: "Bilal taps Helpful. Ibrahim gets +10 and his Helped count goes up.", note: { text: "helping beats posting", side: "left", y: 60 },
+        ui: [{ t: "bar", text: "Masjid Rota · AMA" }, { t: "card", title: "How do I protect admin routes?", sub: "Bilal" }, { t: "card", title: "Ibrahim's answer", sub: "middleware + role check…", chips: ["✅ Helpful"], hl: true }, { t: "spacer" }, { t: "toast", text: "+10 · Ibrahim helped Bilal" }] },
+      { title: "Helped 5 Bros", text: "His fifth Helpful answer earns a permanent badge, shown on his profile and in the feed.",
+        ui: [{ t: "bar", text: "" }, { t: "medal", icon: "🤝", text: "Helped 5 Bros", sub: "Permanent badge" }, { t: "spacer" }, { t: "btn", text: "View profile" }] },
+      { title: "Save it as a snippet", text: "One tap turns the code block into a snippet in the shared library, tagged Next.js · auth.",
+        ui: [{ t: "bar", text: "New snippet" }, { t: "input", label: "Title", value: "Admin-only middleware" }, { t: "chips", items: ["Next.js", "auth", "middleware"] }, { t: "code", text: "export function middleware(req) {…}" }, { t: "spacer" }, { t: "btn", text: "Add to library", primary: true, hl: true }] },
+      { title: "Others copy it", text: "In the Snippets library anyone copies it in one tap. Copies earn him a little, up to a weekly cap.", device: "laptop", note: { text: "copy, paste, done", side: "right", y: 2 },
+        ui: [{ t: "bar", text: "Snippets" }, { t: "chips", items: ["All", "React", "Next.js", "Flutter", "SQL"], on: 2 }, { t: "card", title: "Admin-only middleware · Ibrahim", sub: "copied 12×", chips: ["Copy"], hl: true }, { t: "card", title: "useDebounce hook · Hamza", sub: "copied 31×" }, { t: "card", title: "Supabase RLS for owners · Bilal", sub: "copied 8×" }] },
+    ],
+  },
+];
+
+const which = new URLSearchParams(location.search).get("b") || "01-discover";
+const b = boards.find((x) => x.file === which);
+document.getElementById("root").innerHTML = `
+  <div class="head"><h1>${b.title}</h1><span class="tag">Project Emerald · ${b.tag}</span></div>
+  <div class="persona"><span class="av">${b.persona[0]}</span><span>${b.persona[1]}</span></div>
+  <div class="grid">${b.panels.map((p, i) => `
+    <div class="panel"><span class="num">${i + 1}</span>${device(p)}
+      <div class="cap"><h3>${p.title}</h3><p>${p.text}</p></div></div>`).join("")}
+  </div>`;
+window.BOARDS = boards.map((x) => x.file);
+</script>
+</body>
+</html>

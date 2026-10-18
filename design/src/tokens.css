@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Manrope:wght@400..800&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500;700&display=swap");
+
+:root {
+  --bg: #fbf8f1;
+  --surface: #ffffff;
+  --sunk: #f3efe4;
+  --ink: #16201b;
+  --muted: #56615b;
+  --line: #e4ddcd;
+  --emerald: #0f7b5a;
+  --emerald-ink: #0b5c43;
+  --emerald-soft: #e2f1e9;
+  --gold: #c99a3a;
+  --gold-ink: #835c12;
+  --gold-soft: #f7ecd3;
+  --blue-ink: #2a5694;
+  --blue-soft: #e5edf8;
+  --rose-ink: #a33a31;
+  --rose-soft: #f8e5e2;
+  --violet-ink: #5b4397;
+  --violet-soft: #ece7f7;
+
+  --wire-ink: #2b2b2b;
+  --wire-fill: #ececec;
+  --wire-mid: #c9c9c9;
+
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --body: "Manrope", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --hand: "Caveat", "Comic Sans MS", cursive;
+  --r: 14px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }

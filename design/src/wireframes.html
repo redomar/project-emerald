@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Emerald wireframes</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { width: 1600px; padding: 48px 56px 56px; background: #fafafa; color: var(--wire-ink); }
+  .head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; border-bottom: 2px solid var(--wire-ink); padding-bottom: 14px; }
+  .head h1 { font: 800 40px/1.05 var(--display); margin: 0; letter-spacing: -0.02em; }
+  .head .tag { font: 600 15px var(--body); color: #666; }
+  .sub { margin: -12px 0 26px; color: #555; font-size: 17px; max-width: 1100px; line-height: 1.45; }
+
+  /* diagram */
+  .dia { position: relative; }
+  .dia svg { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+  .n { position: absolute; border: 2px solid var(--wire-ink); background: #fff; border-radius: 10px; padding: 10px 12px; font: 800 16px/1.2 var(--display); text-align: center; display: flex; flex-direction: column; justify-content: center; }
+  .n small { display: block; font: 500 12.5px/1.35 var(--body); color: #555; margin-top: 4px; }
+  .n.root { background: var(--wire-ink); color: #fff; }
+  .n.root small { color: #ddd; }
+  .n.key { border-color: var(--emerald); border-width: 2.5px; background: var(--emerald-soft); }
+  .n.ext { border-style: dashed; background: transparent; color: #666; }
+  .n.dec { border-radius: 4px; transform: none; background: var(--gold-soft); border-color: var(--gold-ink); }
+  .n.pt { border-color: var(--gold-ink); background: #fff; }
+  .n.group { background: #f0f0f0; border: 1.5px dashed #999; z-index: -1; align-items: flex-start; justify-content: flex-start; font: 800 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: #777; padding: 8px 12px; text-align: left; }
+  .elabel { position: absolute; font: 700 12px var(--body); background: #fafafa; padding: 1px 6px; color: #555; border-radius: 4px; transform: translate(-50%, -50%); white-space: nowrap; }
+  .legend { display: flex; gap: 22px; margin-top: 18px; font: 600 14px var(--body); color: #555; }
+  .legend span { display: inline-flex; gap: 8px; align-items: center; }
+  .legend i { width: 26px; height: 16px; border: 2px solid var(--wire-ink); border-radius: 4px; background: #fff; display: inline-block; }
+
+  /* screen wireframes */
+  .wrap { display: grid; grid-template-columns: 1fr 330px; gap: 34px; align-items: start; }
+  .browser { border: 2px solid var(--wire-ink); border-radius: 10px; background: #fff; overflow: hidden; }
+  .chrome { height: 34px; border-bottom: 2px solid var(--wire-ink); display: flex; align-items: center; gap: 7px; padding: 0 12px; background: #f1f1f1; }
+  .chrome i { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--wire-ink); }
+  .chrome .url { margin-left: 14px; flex: 1; height: 20px; border: 1.5px solid #aaa; border-radius: 99px; font: 500 12px/17px var(--mono); padding: 0 10px; color: #666; background: #fff; }
+  .page { padding: 18px 22px 24px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+  .nav { display: flex; align-items: center; gap: 18px; font: 700 14px var(--body); padding-bottom: 12px; border-bottom: 1.5px solid #ccc; }
+  .nav .logo { font: 800 18px var(--display); margin-right: 16px; white-space: nowrap; }
+  .nav .on { text-decoration: underline 3px; text-underline-offset: 6px; }
+  .nav .grow { flex: 1; }
+  .b { border: 1.8px solid var(--wire-ink); border-radius: 9px; padding: 12px; position: relative; background: #fff; }
+  .b.soft { border-color: #aaa; }
+  .b h4 { margin: 0 0 6px; font: 800 15px var(--display); }
+  .b p { margin: 0; font: 500 12.5px/1.4 var(--body); color: #555; }
+  .ph { background: repeating-linear-gradient(45deg, #dedede 0 7px, #ececec 7px 14px); border-radius: 6px; }
+  .ln { height: 8px; border-radius: 4px; background: #d2d2d2; margin: 6px 0; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; font: 800 13px var(--body); padding: 8px 14px; border-radius: 8px; border: 1.8px solid var(--wire-ink); background: #fff; white-space: nowrap; }
+  .btn.p { background: var(--wire-ink); color: #fff; }
+  .chip { display: inline-block; font: 700 11.5px var(--body); padding: 3px 9px; border-radius: 99px; border: 1.5px solid var(--wire-ink); margin: 2px 3px 2px 0; }
+  .av { width: 36px; height: 36px; border-radius: 50%; border: 1.8px solid var(--wire-ink); background: #eee; display: grid; place-items: center; font: 800 13px var(--display); flex: none; }
+  .av.lg { width: 76px; height: 76px; font-size: 26px; }
+  .row { display: flex; gap: 12px; align-items: center; }
+  .col { display: flex; flex-direction: column; gap: 10px; position: relative; }
+  .tabs { position: relative; }
+  .g { display: grid; gap: 14px; }
+  .t { font: 700 13px var(--body); }
+  .t small { display: block; font-weight: 500; color: #666; font-size: 12px; }
+  .tabs { display: flex; gap: 20px; border-bottom: 1.5px solid #ccc; font: 700 14px var(--body); }
+  .tabs span { padding: 8px 0; color: #777; }
+  .tabs span.on { color: var(--wire-ink); border-bottom: 3px solid var(--wire-ink); margin-bottom: -1.5px; }
+  .fab { position: absolute; width: 54px; height: 54px; border-radius: 50%; background: var(--wire-ink); color: #fff; font: 800 30px/52px var(--display); text-align: center; }
+  .code { background: #2b2b2b; color: #ddd; border-radius: 7px; padding: 10px 12px; font: 500 11.5px/1.6 var(--mono); }
+
+  .m { position: absolute; width: 26px; height: 26px; border-radius: 50%; background: var(--emerald); color: #fff; font: 800 13px/26px var(--display); text-align: center; z-index: 3; box-shadow: 0 0 0 3px #fff; }
+  .notes { display: flex; flex-direction: column; gap: 14px; }
+  .notes div { display: grid; grid-template-columns: 28px 1fr; gap: 10px; font: 500 14px/1.45 var(--body); color: #333; }
+  .notes b { display: block; font: 800 15px var(--display); color: var(--wire-ink); margin-bottom: 1px; }
+  .notes .k { width: 26px; height: 26px; border-radius: 50%; background: var(--emerald); color: #fff; font: 800 13px/26px var(--display); text-align: center; }
+  .notes h3 { font: 800 13px var(--body); text-transform: uppercase; letter-spacing: .08em; color: #777; margin: 0 0 2px; }
+
+  /* mobile */
+  .phones { display: flex; gap: 34px; justify-content: center; }
+  .ph-w { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .ph-w > span { font: 800 16px var(--display); }
+  .phone { width: 300px; height: 620px; border: 2.5px solid var(--wire-ink); border-radius: 38px; background: #fff; padding: 40px 14px 0; position: relative; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .phone::before { content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 80px; height: 20px; border-radius: 12px; background: var(--wire-ink); }
+  .tabbar { margin: auto -14px 0; border-top: 1.8px solid var(--wire-ink); display: grid; grid-template-columns: repeat(5, 1fr); padding: 8px 0 22px; font: 700 10.5px var(--body); text-align: center; background: #fff; }
+  .tabbar span::before { content: ""; display: block; width: 20px; height: 20px; border-radius: 6px; border: 1.8px solid var(--wire-ink); margin: 0 auto 4px; }
+  .tabbar .plus::before { background: var(--wire-ink); border-radius: 50%; width: 30px; height: 30px; margin-top: -10px; }
+  .tabbar .on { text-decoration: underline 2px; text-underline-offset: 3px; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; border-top: 2px solid var(--wire-ink); border-radius: 22px 22px 0 0; background: #fff; padding: 12px 16px 30px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 -400px 0 400px rgba(0,0,0,.25); }
+  .sheet .grab { width: 44px; height: 5px; border-radius: 3px; background: #aaa; margin: 0 auto 4px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const which = new URLSearchParams(location.search).get("w") || "01-sitemap";
+const root = document.getElementById("root");
+const head = (title, tag, sub) => `<div class="head"><h1>${title}</h1><span class="tag">Project Emerald · ${tag}</span></div>${sub ? `<p class="sub">${sub}</p>` : ""}`;
+
+// ---------- diagram engine: absolutely placed nodes + SVG connectors ----------
+function diagram({ w, h, nodes, edges }) {
+  const html = nodes.map((n) => `<div class="n ${n.c || ""}" id="${n.id}" style="left:${n.x}px;top:${n.y}px;width:${n.w || 190}px;height:${n.h || 64}px">${n.t}${n.s ? `<small>${n.s}</small>` : ""}</div>`).join("");
+  return { html: `<div class="dia" style="width:${w}px;height:${h}px">${html}<svg width="${w}" height="${h}"><defs>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/></marker>
+      <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#835c12"/></marker></defs></svg></div>`, edges };
+}
+function drawEdges(edges) {
+  const dia = document.querySelector(".dia"); const svg = dia.querySelector("svg"); const o = dia.getBoundingClientRect();
+  const box = (id) => { const r = document.getElementById(id).getBoundingClientRect(); return { l: r.left - o.left, t: r.top - o.top, r: r.right - o.left, b: r.bottom - o.top, cx: (r.left + r.right) / 2 - o.left, cy: (r.top + r.bottom) / 2 - o.top }; };
+  for (const e of edges) {
+    const [f, t, label, opt = {}] = e; const A = box(f), B = box(t);
+    let d, mid;
+    const mode = opt.m || "v";
+    if (mode === "v") { // bottom → top, elbow
+      const y1 = A.b, y2 = B.t, my = opt.y ?? (y1 + y2) / 2;
+      d = `M${A.cx},${y1} V${my} H${B.cx} V${y2}`; mid = [B.cx, (my + y2) / 2];
+    } else if (mode === "h") { // right → left
+      const x1 = A.r, x2 = B.l, mx = (x1 + x2) / 2;
+      d = `M${x1},${A.cy} H${mx} V${B.cy} H${x2}`; mid = [mx, (A.cy + B.cy) / 2];
+    } else if (mode === "hl") { // left → right (backwards)
+      d = `M${A.l},${A.cy} H${B.r}`; mid = [(A.l + B.r) / 2, A.cy];
+    } else if (mode === "up") { // top → bottom of target
+      const my = opt.y ?? (A.t + B.b) / 2;
+      d = `M${A.cx},${A.t} V${my} H${B.cx} V${B.b}`; mid = [B.cx, (my + B.b) / 2];
+    } else if (mode === "loop") { // under both, back to target bottom
+      const y = opt.y; d = `M${A.cx},${A.b} V${y} H${B.cx} V${B.b}`; mid = [(A.cx + B.cx) / 2, y];
+    }
+    const gold = opt.gold; const dash = opt.dash ? 'stroke-dasharray="7 6"' : "";
+    svg.insertAdjacentHTML("beforeend", `<path d="${d}" fill="none" stroke="${gold ? "#835c12" : "#2b2b2b"}" stroke-width="2" ${dash} marker-end="url(#${gold ? "ag" : "a"})"/>`);
+    if (label) dia.insertAdjacentHTML("beforeend", `<span class="elabel" style="left:${mid[0]}px;top:${mid[1]}px">${label}</span>`);
+  }
+}
+
+// ---------- pages ----------
+const pages = {};
+
+pages["01-sitemap"] = () => {
+  const top = 150, X = (i) => 20 + i * 245;
+  const d = diagram({ w: 1488, h: 860, nodes: [
+    { id: "in", t: "Sign in", s: "GitHub or email · invite only", x: 649, y: 0, c: "root" },
+    { id: "home", t: "Home", s: "Spotlight · feed · this week", x: X(0), y: top, c: "key" },
+    { id: "bld", t: "Builders", s: "everyone, filter by stack", x: X(1), y: top, c: "key" },
+    { id: "prj", t: "Projects", s: "Building · Launched · Done", x: X(2), y: top, c: "key" },
+    { id: "lrn", t: "Learn", s: "learnings · news · opinions", x: X(3), y: top, c: "key" },
+    { id: "snp", t: "Snippets", s: "quick-copy library", x: X(4), y: top, c: "key" },
+    { id: "lb", t: "Leaderboard", s: "weekly · badges", x: X(5), y: top, c: "key" },
+    { id: "potm", t: "Project of the Month", s: "spotlight + past winners", x: X(0), y: 300 },
+    { id: "feed", t: "Activity feed", s: "launches, learnings, badges", x: X(0), y: 390 },
+    { id: "help", t: "Can you help?", s: "open AMA Qs for your stack", x: X(0), y: 480 },
+    { id: "prof", t: "Profile", s: "projects · learnings · badges · streak", x: X(1), y: 300, h: 80 },
+    { id: "page", t: "Project page", s: "Open app · stack · GitHub · What I learned", x: X(2), y: 300, h: 80 },
+    { id: "ama", t: "AMA tab", s: "questions · Helpful answers", x: X(2), y: 420 },
+    { id: "upd", t: "Updates tab", s: "synced from GitHub", x: X(2), y: 510 },
+    { id: "post", t: "Learning / article", s: "Written here mark · comments", x: X(3), y: 300, h: 80 },
+    { id: "snip", t: "Snippet", s: "copy · source answer", x: X(4), y: 300 },
+    { id: "badges", t: "Badge gallery", s: "how to earn each", x: X(5), y: 300 },
+    { id: "pts", t: "How points work", s: "transparent rules", x: X(5), y: 390 },
+    { id: "grpA", t: "Global", x: 20, y: 620, w: 960, h: 210, c: "group" },
+    { id: "add", t: "＋ Add", s: "on every screen", x: 50, y: 680, w: 170, c: "root" },
+    { id: "a1", t: "New project", s: "pick a GitHub repo", x: 260, y: 650, w: 170, h: 56 },
+    { id: "a2", t: "Write learning", s: "guided, own words", x: 450, y: 650, w: 170, h: 56 },
+    { id: "a3", t: "Share article", s: "link + your take", x: 640, y: 650, w: 170, h: 56 },
+    { id: "a4", t: "Add snippet", x: 260, y: 740, w: 170, h: 56 },
+    { id: "a5", t: "Ask a question", s: "on a project's AMA", x: 450, y: 740, w: 170, h: 56 },
+    { id: "a6", t: "Nominate POTM", s: "monthly", x: 640, y: 740, w: 170, h: 56 },
+    { id: "ntf", t: "Notifications", s: "answers · badges · recap", x: 1030, y: 650, w: 200 },
+    { id: "set", t: "Settings", s: "linked repos · profile · privacy", x: 1030, y: 740, w: 200 },
+    { id: "cal", t: "M Omar's calendar", s: "separate app: link only", x: 1268, y: 690, w: 200, c: "ext" },
+  ]});
+  root.innerHTML = head("Sitemap", "wire diagram 1 · information architecture",
+    "Six top-level sections and one global <b>＋ Add</b> button. Everything a member creates starts from that button, so there's one habit to learn. The calendar stays a separate app and is only linked.")
+    + d.html + `<div class="legend"><span><i style="background:var(--emerald-soft);border-color:var(--emerald)"></i>Top-level nav</span><span><i></i>Screen / sub-view</span><span><i style="background:var(--wire-ink)"></i>Entry / action hub</span><span><i style="border-style:dashed"></i>Out of scope (link only)</span></div>`;
+  const E = [["in", "home", "", { y: 110 }], ["in", "bld", "", { y: 110 }], ["in", "prj", "", { y: 110 }], ["in", "lrn", "", { y: 110 }], ["in", "snp", "", { y: 110 }], ["in", "lb", "", { y: 110 }],
+    ["home", "potm"], ["potm", "feed"], ["feed", "help"], ["bld", "prof"], ["prj", "page"], ["page", "ama"], ["ama", "upd"], ["lrn", "post"], ["snp", "snip"], ["lb", "badges"], ["badges", "pts"]];
+  drawEdges(E);
+  drawEdges([["add", "a1", "", { m: "h" }], ["add", "a4", "", { m: "h" }]]);
+};
+
+pages["02-flows"] = () => {
+  const d = diagram({ w: 1488, h: 1060, nodes: [
+    { id: "f1", t: "Flow A · Add a project (low-effort GitHub sync)", x: 0, y: 0, w: 1488, h: 230, c: "group" },
+    { id: "a1", t: "＋ Add → New project", x: 20, y: 70, w: 190, c: "root" },
+    { id: "a2", t: "GitHub linked?", x: 260, y: 70, w: 170, c: "dec" },
+    { id: "a2b", t: "Connect GitHub", s: "one-time, read-only", x: 260, y: 160, w: 170, h: 56 },
+    { id: "a3", t: "Pick repos", s: "tick boxes", x: 480, y: 70, w: 170 },
+    { id: "a4", t: "Auto-fill", s: "name · README · languages · homepage", x: 700, y: 64, w: 230, h: 76 },
+    { id: "a5", t: "Choose status", s: "Building / Launched / Completed", x: 980, y: 64, w: 220, h: 76 },
+    { id: "a6", t: "Project page live", s: "+ feed post", x: 1250, y: 70, w: 210, c: "key" },
+
+    { id: "f2", t: "Flow B · Write a learning (human words)", x: 0, y: 260, w: 1488, h: 260, c: "group" },
+    { id: "b1", t: "＋ Add → Write learning", x: 20, y: 330, w: 190, c: "root" },
+    { id: "b2", t: "Guided editor", s: "built · used · went wrong · again", x: 250, y: 324, w: 200, h: 76 },
+    { id: "b3", t: "Big paste?", x: 500, y: 330, w: 150, c: "dec" },
+    { id: "b3b", t: "“Is this in your own words?”", s: "Yes, it's mine / Let me rewrite", x: 470, y: 430, w: 230, h: 70 },
+    { id: "b4", t: "Tick pledge + publish", s: "≥ 80 words", x: 750, y: 330, w: 200 },
+    { id: "b5", t: "Learning live", s: "Written here mark", x: 1010, y: 330, w: 190, c: "key" },
+    { id: "b6", t: "Member flags?", s: "organiser reviews", x: 1250, y: 330, w: 210, c: "ext" },
+
+    { id: "f3", t: "Flow C · Ask → answer → Helpful", x: 0, y: 550, w: 1488, h: 190, c: "group" },
+    { id: "c1", t: "Ask on AMA tab", x: 20, y: 620, w: 190, c: "root" },
+    { id: "c2", t: "Builder + matching stack notified", x: 260, y: 614, w: 230, h: 76 },
+    { id: "c3", t: "Answer posted", s: "text + code", x: 540, y: 620, w: 190 },
+    { id: "c4", t: "Asker taps Helpful", x: 780, y: 620, w: 190, c: "key" },
+    { id: "c5", t: "Save as snippet?", s: "optional, 1 tap", x: 1020, y: 620, w: 190 },
+    { id: "c6", t: "Snippet library", x: 1260, y: 620, w: 200 },
+
+    { id: "f4", t: "Points engine · every action feeds one place", x: 0, y: 770, w: 1488, h: 290, c: "group" },
+    { id: "pg", t: "Actions", x: 8, y: 810, w: 520, h: 225, c: "group" },
+    { id: "p1", t: "Launch +50", x: 20, y: 830, w: 150, h: 48, c: "pt" },
+    { id: "p2", t: "Learning +15", x: 190, y: 830, w: 150, h: 48, c: "pt" },
+    { id: "p3", t: "Helpful +10", x: 360, y: 830, w: 150, h: 48, c: "pt" },
+    { id: "p4", t: "Answer +5", x: 20, y: 900, w: 150, h: 48, c: "pt" },
+    { id: "p5", t: "Snippet +5 · copies +1", x: 190, y: 900, w: 150, h: 48, c: "pt" },
+    { id: "p6", t: "Article +5 (≤3/wk)", x: 360, y: 900, w: 150, h: 48, c: "pt" },
+    { id: "p7", t: "Coding day +3 (≤15/wk)", x: 20, y: 970, w: 320, h: 48, c: "pt" },
+    { id: "pe", t: "Contribution log", s: "one row per action · caps applied", x: 600, y: 880, w: 230, h: 76, c: "root" },
+    { id: "lb", t: "Weekly leaderboard", s: "resets Monday 00:00", x: 920, y: 820, w: 230, h: 70, c: "key" },
+    { id: "bd", t: "Milestone badges", s: "permanent", x: 920, y: 950, w: 230, h: 70, c: "key" },
+    { id: "rc", t: "Friday recap", s: "top 3 · new badges · POTM", x: 1230, y: 820, w: 230, h: 70 },
+    { id: "pr", t: "Profile", s: "badges + streak", x: 1230, y: 950, w: 230, h: 70 },
+  ]});
+  root.innerHTML = head("User flows + points", "wire diagram 2 · flows", "The four loops the brief describes. Gold boxes are decisions. Every contribution writes one row to a single log, and the leaderboard and badges are both read from it.") + d.html;
+  drawEdges([
+    ["a1", "a2", "", { m: "h" }], ["a2", "a3", "yes", { m: "h" }], ["a2", "a2b", "no"], ["a2b", "a3", "", { m: "h" }], ["a3", "a4", "", { m: "h" }], ["a4", "a5", "", { m: "h" }], ["a5", "a6", "", { m: "h" }],
+    ["b1", "b2", "", { m: "h" }], ["b2", "b3", "", { m: "h" }], ["b3", "b4", "no", { m: "h" }], ["b3", "b3b", "yes"], ["b3b", "b4", "", { m: "h" }], ["b4", "b5", "", { m: "h" }], ["b5", "b6", "", { m: "h", dash: true }],
+    ["c1", "c2", "", { m: "h" }], ["c2", "c3", "", { m: "h" }], ["c3", "c4", "", { m: "h" }], ["c4", "c5", "", { m: "h" }], ["c5", "c6", "", { m: "h" }],
+    ["pg", "pe", "", { m: "h", gold: true }],
+    ["pe", "lb", "", { m: "h" }], ["pe", "bd", "", { m: "h" }], ["lb", "rc", "", { m: "h" }], ["bd", "pr", "", { m: "h" }],
+  ]);
+};
+
+const screen = (url, inner, notes) => `<div class="wrap"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">${url}</span></div><div class="page">${inner}</div></div>
+  <div class="notes"><h3>Notes</h3>${notes.map(([t, s], i) => `<div><span class="k">${i + 1}</span><span><b>${t}</b>${s}</span></div>`).join("")}</div></div>`;
+const nav = (on) => `<div class="nav"><span class="logo">◆ Emerald</span>${["Home", "Builders", "Projects", "Learn", "Snippets", "Leaderboard"].map((n) => `<span class="${n === on ? "on" : ""}">${n}</span>`).join("")}<span class="grow"></span><span class="btn p">＋ Add</span><span class="av">MO</span></div>`;
+const m = (n, x, y) => `<span class="m" style="left:${x}px;top:${y}px">${n}</span>`;
+const lines = (n, w = 70) => Array.from({ length: n }, (_, i) => `<div class="ln" style="width:${i === n - 1 ? w : 100}%"></div>`).join("");
+
+pages["03-home"] = () => {
+  root.innerHTML = head("Home", "wireframe 3 · desktop", "Shows what's new without making anyone dig: the spotlight, who's active this week, and one way to help.") + screen("emerald.devbros.uk", `
+    ${nav("Home")}${m(1, 1050, 14)}
+    <div class="row" style="justify-content:space-between"><div class="t" style="font:800 24px var(--display)">Salam, Mohamed<small style="font-size:14px">You're #3 this week · 2 more points to pass Ibrahim</small></div>${m(2, 420, 70)}</div>
+    <div class="g" style="grid-template-columns:2fr 1fr">
+      <div class="b" style="display:grid;grid-template-columns:1.1fr 1fr;gap:16px">${m(3, -10, -10)}
+        <div class="ph" style="height:200px"></div>
+        <div class="col"><span class="chip">⭐ Project of the Month · October</span><h4 style="font-size:24px;margin:0">Salah Buddy</h4><p>by Yusuf · Flutter · Firebase</p>${lines(3)}<div class="row"><span class="btn p">Open app ↗</span><span class="btn">Read the story</span></div></div></div>
+      <div class="b">${m(4, -10, -10)}<h4>This week</h4>${["Yusuf 86", "Ibrahim 61", "Mohamed 54", "Ahmed 35", "Zayd 30"].map((r, i) => `<div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid #ddd"><span class="t">${i + 1}. ${r.split(" ")[0]}</span><b>${r.split(" ")[1]}</b></div>`).join("")}<p style="margin-top:8px">Full leaderboard →</p></div>
+    </div>
+    <div class="g" style="grid-template-columns:2fr 1fr">
+      <div class="b">${m(5, -10, -10)}<div class="tabs"><span class="on">Everything</span><span>Launches</span><span>Learnings</span><span>News</span></div>
+        ${[["H", "Hamza launched Receipt Snap", "React Native · Claude API · 2h"], ["Z", "Zayd wrote “SwiftUI widgets the easy way”", "Learning · 5 min read · Written here"], ["A", "Ahmed shared “New AI agents can now ship whole apps”", "News · with his take"], ["I", "Ibrahim earned 🤝 Helped 5 Bros", "Badge"]].map(([a, t, s]) => `<div class="row" style="padding:10px 0;border-bottom:1px solid #e3e3e3"><span class="av">${a}</span><div class="t">${t}<small>${s}</small></div></div>`).join("")}</div>
+      <div class="col">
+        <div class="b" style="border-color:var(--emerald)">${m(6, -10, -10)}<h4>🙋 Can you help?</h4><p>2 open questions in Next.js</p><div class="b soft" style="margin-top:8px;padding:8px"><p><b>Bilal</b>: How do I protect admin routes in Masjid Rota?</p></div><span class="btn" style="margin-top:8px">Answer</span></div>
+        <div class="b">${m(7, -10, -10)}<h4>Your next badge</h4><p>🔥 4-Week Streak: 3 of 4 weeks</p><div style="height:10px;border:1.5px solid #2b2b2b;border-radius:99px;margin-top:8px"><div style="width:75%;height:100%;background:#2b2b2b"></div></div></div>
+      </div>
+    </div>`,
+  [["Global ＋ Add", "Same button on every screen: project, learning, article, snippet, question."], ["Personal line", "One sentence of status. It nudges without nagging."], ["Project of the Month", "The biggest thing on the page. Open app goes straight to the live app."], ["This week", "Top 5 only, to keep it friendly. The full board is one tap away."], ["Feed", "Plain-language events, no commit hashes. Filter chips for builders vs readers."], ["Can you help?", "Open AMA questions matched to your stack. This is what makes helping visible."], ["Next badge", "Shows progress on the badge closest to unlocking."]]);
+};
+
+pages["04-project"] = () => {
+  root.innerHTML = head("Project page", "wireframe 4 · desktop", "The heart of the brief: what was built, the live app, the stack, the code, and what the builder learned. AMA and Updates are tabs, not separate pages.") + screen("emerald.devbros.uk/p/salah-buddy", `
+    ${nav("Projects")}
+    <div class="g" style="grid-template-columns:1.25fr 1fr;align-items:start">
+      <div class="col">
+        <div class="ph" style="height:250px;position:relative">${m(1, -10, -10)}</div>
+        <div class="tabs">${m(5, -30, 6)}<span class="on">About</span><span>What I learned</span><span>Updates · 12</span><span>AMA · 4</span></div>
+        <div class="b">${m(6, -10, -10)}<h4>What I learned</h4><p style="margin-bottom:6px"><span class="chip">✍️ Written here</span></p>
+          <div class="g" style="grid-template-columns:1fr 1fr"><div><p><b>Techniques I used</b></p>${lines(2)}</div><div><p><b>What went wrong</b></p>${lines(2)}</div><div><p><b>I'd do differently</b></p>${lines(2)}</div><div><p><b>Time it took</b></p><p>~3 weekends</p></div></div></div>
+      </div>
+      <div class="col">
+        <span class="chip" style="align-self:flex-start">● Launched · Sep 2026</span>${m(2, -14, -8)}
+        <div style="font:800 34px var(--display)">Salah Buddy</div>
+        <p style="margin:0;color:#555">Prayer times on your home screen, with a widget that changes at each prayer.</p>
+        <div class="row"><span class="av">Y</span><div class="t">Yusuf<small>6-week streak · 🚀 🤝 ⭐</small></div></div>
+        <div class="row" style="position:relative">${m(3, -14, -10)}<span class="btn p" style="flex:1">Open app ↗</span><span class="btn">GitHub ↗</span></div>
+        <div class="b">${m(4, -10, -10)}<h4>Tech stack</h4><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Firebase</span><span class="chip">Riverpod</span><span class="chip">FCM</span><p style="margin-top:6px">from GitHub languages · edited by Yusuf</p></div>
+        <div class="b soft"><h4>Recent updates</h4><p>Synced from GitHub: “Added Isha reminder” · 2 days ago</p><p>“Widget dark mode” · 5 days ago</p></div>
+        <div class="b soft"><h4>Similar projects</h4><p>Quran Streak · Zayd &nbsp;·&nbsp; Masjid Rota · Bilal</p></div>
+      </div>
+    </div>`,
+  [["Cover", "Screenshot from the README or uploaded. Falls back to the initials + colour if empty."], ["Status chip", "Building · Launched · Completed. Launched means the app link was checked."], ["Open app first", "The main action. Hidden when the project is private, and GitHub only shows if the repo is public."], ["Tech stack", "Auto-filled from GitHub languages; the builder can add frameworks."], ["Tabs", "About, What I learned, Updates (synced commits as plain sentences), AMA."], ["What I learned", "Structured prompts so it's quick to write and easy to scan. Shows the Written here mark."]]);
+};
+
+pages["05-builders-profile"] = () => {
+  const card = (a, n, now, st) => `<div class="b" style="text-align:center"><span class="av lg" style="margin:0 auto 8px">${a}</span><h4>${n}</h4><p>Building: ${now}</p><div style="margin-top:8px">${st.map((s) => `<span class="chip">${s}</span>`).join("")}</div><p style="margin-top:8px">🚀 🤝 🔥</p></div>`;
+  root.innerHTML = head("Builders + profile", "wireframe 5 · desktop", "Directory on the left, profile on the right. Both lead with what people are building now, not follower counts.") + `<div class="g" style="grid-template-columns:1fr 1fr;gap:30px">
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">/builders</span></div><div class="page">${nav("Builders")}
+      <div class="row" style="position:relative">${m(1, -14, -10)}<div class="b soft" style="flex:1;padding:8px 12px"><p>🔍 Search builders or stack…</p></div></div>
+      <div style="position:relative;padding-left:18px">${m(2, -14, -6)}<span class="chip">All 14</span><span class="chip">Flutter</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Has a live app</span><span class="chip">Non-tech</span></div>
+      <div class="g" style="grid-template-columns:repeat(3,1fr);position:relative">${m(3, -10, -10)}${card("Y", "Yusuf", "Salah Buddy", ["Flutter", "Firebase"])}${card("I", "Ibrahim", "Halal Eats Map", ["Svelte", "Mapbox"])}${card("MO", "Mohamed", "OFP Planner", ["Next.js", "Convex"])}${card("Z", "Zayd", "Quran Streak", ["SwiftUI"])}${card("H", "Hamza", "Receipt Snap", ["RN", "Claude"])}${card("A", "Ahmed", "reads + shares", ["News"])}</div>
+    </div></div>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">/u/yusuf</span></div><div class="page">${nav("Builders")}
+      <div class="row" style="gap:18px;position:relative">${m(4, -14, -10)}<span class="av lg">Y</span><div class="t" style="font:800 26px var(--display)">Yusuf<small style="font-size:14px">Flutter dev · Birmingham · joined Jan 2026</small></div></div>
+      <div class="g" style="grid-template-columns:repeat(4,1fr);position:relative">${m(5, -10, -10)}${[["3", "projects"], ["2", "live apps"], ["7", "learnings"], ["6 wk", "streak"]].map(([a, b]) => `<div class="b soft" style="text-align:center"><div style="font:800 22px var(--display)">${a}</div><p>${b}</p></div>`).join("")}</div>
+      <div class="b" style="position:relative">${m(6, -10, -10)}<h4>Badges</h4><span class="chip">🚀 First App Launched</span><span class="chip">🤝 Helped 5 Bros</span><span class="chip">⭐ POTM Oct</span><span class="chip">🔥 4-Week Streak</span></div>
+      <div class="tabs"><span class="on">Building · 1</span><span>Done · 2</span><span>Learnings · 7</span><span>Answers</span></div>
+      <div class="g" style="grid-template-columns:1fr 1fr"><div class="b"><div class="ph" style="height:80px;margin-bottom:8px"></div><h4>Salah Buddy</h4><p>● Launched · Flutter</p></div><div class="b"><div class="ph" style="height:80px;margin-bottom:8px"></div><h4>Quran Tracker</h4><p>Completed · Flutter</p></div></div>
+    </div></div></div>
+    <div class="notes" style="margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px 30px">${[["Search", "Names and stack in one box."], ["Filter chips", "Stack, has a live app, and Non-tech, so readers have a place too."], ["Builder cards", "Initials avatar (no photos needed), what they're building now, top stack, badge icons."], ["Profile header", "Name, one-line role, where they're from. Nothing to configure."], ["At a glance", "Four numbers. The streak is weekly, so one quiet day doesn't break it."], ["Badges", "Permanent. Hover or tap explains how each one was earned."]].map(([t, s], i) => `<div><span class="k">${i + 1}</span><span><b>${t}</b>${s}</span></div>`).join("")}</div>`;
+};
+
+pages["06-learn-snippets"] = () => {
+  root.innerHTML = head("Learn + snippets", "wireframe 6 · desktop", "Learn holds members' own words and shared news. Snippets is a copy-first library: the code is visible straight away and Copy is one tap.") + `<div class="g" style="grid-template-columns:1fr 1fr;gap:30px">
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">/learn</span></div><div class="page">${nav("Learn")}
+      <div class="tabs" style="position:relative">${m(1, -14, 2)}<span class="on">All</span><span>Learnings</span><span>Opinions</span><span>News</span></div>
+      <div style="position:relative">${m(2, -14, -6)}<span class="chip">Flutter</span><span class="chip">AI tools</span><span class="chip">Deploying</span><span class="chip">Design</span><span class="chip">Career</span></div>
+      ${[["SwiftUI widgets the easy way", "Zayd · Learning · 5 min · ✍️ Written here", true], ["Why I stopped using Firebase for everything", "Bilal · Opinion · 3 min · ✍️ Written here", true], ["New AI agents can now ship whole apps", "Ahmed shared · The Verge · “Worth trying for our next hackathon”", false], ["What 3 weekends of Flutter taught me", "Yusuf · Learning · 4 min · ✍️ Written here", true]].map(([t, s, w], i) => `<div class="b" style="display:grid;grid-template-columns:${w ? "1fr" : "120px 1fr"};gap:12px;position:relative">${i === 2 ? m(3, -10, -10) : ""}${i === 0 ? m(4, -10, -10) : ""}${w ? "" : '<div class="ph" style="height:70px"></div>'}<div><h4>${t}</h4><p>${s}</p>${w ? lines(1, 80) : ""}</div></div>`).join("")}
+    </div></div>
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">/snippets</span></div><div class="page">${nav("Snippets")}
+      <div class="row" style="position:relative">${m(5, -14, -10)}<div class="b soft" style="flex:1;padding:8px 12px"><p>🔍 Search “debounce”, “auth”, “supabase”…</p></div></div>
+      <div><span class="chip">All</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Flutter</span><span class="chip">SQL</span><span class="chip">Shell</span></div>
+      ${[["useDebounce hook", "Hamza · TypeScript · copied 31×", "export function useDebounce(v, ms = 300) {<br>&nbsp;&nbsp;const [d, setD] = useState(v)<br>&nbsp;&nbsp;…"], ["Admin-only middleware", "Ibrahim · Next.js · from an AMA answer · copied 12×", "export function middleware(req) {<br>&nbsp;&nbsp;if (!isAdmin(req)) return deny()<br>}"], ["Supabase RLS for owners", "Bilal · SQL · copied 8×", "create policy \"owner\" on items<br>&nbsp;&nbsp;using (auth.uid() = user_id);"]].map(([t, s, c], i) => `<div class="b" style="position:relative">${i === 0 ? m(6, -10, -10) : ""}${i === 1 ? m(7, -10, -10) : ""}<div class="row" style="justify-content:space-between;margin-bottom:8px"><div class="t">${t}<small>${s}</small></div><span class="btn p">Copy</span></div><div class="code">${c}</div></div>`).join("")}
+    </div></div></div>
+    <div class="notes" style="margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 30px">${[["Types as tabs", "Learnings, Opinions, News. Readers pick the mood."], ["Topic chips", "Topics, not repos. Friendly for non-tech readers."], ["News card", "The article preview plus the sharer's own take in quotes. A take is required."], ["Written here", "Shown on posts written in Emerald's editor."], ["Search first", "Most visits are “I need that thing again”."], ["Copy is primary", "Code visible straight away, no clicking through. The copy count is social proof."], ["Source link", "Snippets saved from an AMA answer link back to the question."]].map(([t, s], i) => `<div><span class="k">${i + 1}</span><span><b>${t}</b>${s}</span></div>`).join("")}</div>`;
+};
+
+pages["07-mobile"] = () => {
+  const tb = (on) => `<div class="tabbar">${["Home", "Builders", "", "Learn", "Board"].map((t) => `<span class="${t === "" ? "plus" : ""} ${t && t === on ? "on" : ""}">${t || "Add"}</span>`).join("")}</div>`;
+  root.innerHTML = head("Mobile", "wireframe 7 · phone", "Most people will open Emerald from the group chat on their phone. The tab bar has the same five places, with ＋ Add in the middle.") + `<div class="phones">
+    <div class="ph-w"><div class="phone"><div class="t" style="font:800 20px var(--display)">Salam, Bilal<small>#9 this week · 🔥 2 weeks</small></div>
+      <div class="b"><span class="chip">⭐ Project of the Month</span><div class="ph" style="height:110px;margin:8px 0"></div><h4>Salah Buddy</h4><p>Yusuf · Flutter</p><span class="btn p" style="width:100%;margin-top:8px">Open app ↗</span></div>
+      <div class="b soft"><h4>This week</h4><p>1 Yusuf 86 · 2 Ibrahim 61 · 3 Mohamed 54</p></div>
+      <div class="row"><span class="av">H</span><div class="t">Hamza launched Receipt Snap<small>2h ago</small></div></div>
+      ${tb("Home")}</div><span>Home</span></div>
+    <div class="ph-w"><div class="phone"><div class="ph" style="height:150px;margin:-6px -14px 0"></div><span class="chip" style="align-self:flex-start">● Launched</span><div style="font:800 24px var(--display)">Salah Buddy</div><div class="row"><span class="av">Y</span><div class="t">Yusuf<small>🚀 🤝 ⭐</small></div></div>
+      <div class="row"><span class="btn p" style="flex:1">Open app ↗</span><span class="btn">GitHub</span></div>
+      <div><span class="chip">Flutter</span><span class="chip">Firebase</span><span class="chip">Riverpod</span></div>
+      <div class="tabs" style="font-size:12.5px;gap:14px"><span class="on">Learned</span><span>Updates</span><span>AMA 4</span></div>${lines(4)}
+      ${tb("")}</div><span>Project</span></div>
+    <div class="ph-w"><div class="phone"><div class="t" style="font:800 20px var(--display)">Learn</div>${lines(3)}<div class="b soft"><h4>…</h4>${lines(2)}</div>
+      <div class="sheet"><div class="grab"></div><div style="font:800 18px var(--display)">What do you want to add?</div>
+      ${[["📰", "Share an article", "Link + your take · +5"], ["✍️", "Write a learning", "Guided · +15"], ["🚀", "New project", "From GitHub"], ["🧩", "Add a snippet", "+5"], ["❓", "Ask a question", "On a project"]].map(([i, t, s]) => `<div class="row b" style="padding:9px 12px"><span style="font-size:20px">${i}</span><div class="t">${t}<small>${s}</small></div></div>`).join("")}</div></div><span>＋ Add sheet</span></div>
+    <div class="ph-w"><div class="phone"><div class="t" style="font:800 20px var(--display)">This week<small>Resets Monday · 2 days left</small></div>
+      <div class="row" style="justify-content:center;gap:16px;align-items:flex-end;margin:8px 0">${[["I", 2, 70], ["Y", 1, 96], ["MO", 3, 54]].map(([a, r, hgt]) => `<div style="text-align:center"><span class="av" style="margin:0 auto 4px">${a}</span><div style="width:60px;height:${hgt}px;border:1.8px solid #2b2b2b;border-radius:8px 8px 0 0;background:#eee;font:800 20px/${hgt}px var(--display)">${r}</div></div>`).join("")}</div>
+      ${[["4", "Ahmed", 35], ["5", "Zayd", 30], ["6", "Hamza", 22], ["9", "You · Bilal", 12]].map(([r, n, p]) => `<div class="row b soft" style="justify-content:space-between;padding:8px 12px"><span class="t">${r}. ${n}</span><b>${p}</b></div>`).join("")}
+      <p style="font:500 12px var(--body);color:#666;margin:0">How points work →</p>
+      ${tb("Board")}</div><span>Leaderboard</span></div>
+  </div>`;
+};
+
+pages[which]();
+</script>
+</body>
+</html>
