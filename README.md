@@ -32,6 +32,8 @@ One place for the brothers to see who is building what, what they shipped, and w
 
 ```sh
 pnpm install
+pnpm dev             # clickable prototype at http://localhost:4400 (no app yet)
 pnpm design:render   # rebuild the design PNGs (see design/README.md)
-# App commands go here once the stack is set up.
 ```
+
+There is no app yet: `pnpm dev` serves the design prototype until the stack is chosen.
