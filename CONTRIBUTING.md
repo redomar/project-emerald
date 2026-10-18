@@ -4,21 +4,27 @@
 
 ## 1. Prerequisites
 
-- Node 24+ and pnpm 10 (`corepack enable` or `npm i -g pnpm`) *(assumed; confirm when the stack is chosen)*
+- Node 22+ and pnpm 10 (`corepack enable` or `npm i -g pnpm`)
 
 ## 2. Run it locally
 
 ```sh
 git clone git@github.com:redomar/project-emerald.git
 cd project-emerald
-# Install and run steps go here.
+pnpm install
+pnpm dev        # http://localhost:4400
 ```
 
 ## 3. Checks
 
 ```sh
-# pnpm typecheck && pnpm test && pnpm build
+pnpm typecheck && pnpm test && pnpm build
+pnpm preview --port 4455 & pnpm e2e     # every flow in a real browser
 ```
+
+CI runs all of these on every push and PR.
+
+Data lives in your browser only (localStorage). Use Settings → Reset demo to get the demo data back, or Delete all to start empty.
 
 ## 4. Workflow
 

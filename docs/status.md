@@ -9,4 +9,7 @@
 
 - [x] Write the product brief.
 - [ ] Team review of the design previews and the open questions in the brief.
-- [ ] Choose the stack; record it in decisions.md; add package.json, checks and CI.
+- [x] Provisional stack chosen (decision #12); package.json, tests, e2e and CI added.
+- [x] Clickable build of every feature with demo data and admin tools (v0.2.0).
+- [ ] Pick a backend and auth (invite-only), then replace `src/data/store.ts`.
+- [ ] Hosting.
