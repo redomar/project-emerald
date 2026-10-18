@@ -34,12 +34,12 @@ Data lives in your browser only (localStorage). Use Settings → Reset demo to g
 
 ## 5. Versioning and releases
 
-[Semantic Versioning](https://semver.org/), `MAJOR.MINOR.PATCH`. We're in `0.x` until the first launch to members (that's `1.0.0`).
+[Semantic Versioning](https://semver.org/), `MAJOR.MINOR.PATCH`. We released `1.0.0` on 18 Oct 2026; from here every change is a patch, minor or major bump.
 
 | Bump | When | Example |
 |---|---|---|
-| **PATCH** | bug fix, copy fix, nothing new | 0.2.0 → 0.2.1 |
-| **MINOR** | new feature or screen, nothing breaks | 0.2.1 → 0.3.0 |
+| **PATCH** | bug fix, copy fix, nothing new | 1.0.0 → 1.0.1 |
+| **MINOR** | new feature or screen, nothing breaks | 1.0.1 → 1.1.0 |
 | **MAJOR** | breaking change: data migration, removed URLs, changed flows | 1.4.2 → 2.0.0 |
 
 The version lives in `package.json`.

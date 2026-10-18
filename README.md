@@ -21,10 +21,10 @@ One place for the brothers to see who is building what, what they shipped, and w
 ## How we work
 
 - **Never commit straight to `main`.** Branch (`feature/…`, `fix/…`), open a PR, merge when it's reviewed.
-- **[Semantic Versioning](https://semver.org/)** (`MAJOR.MINOR.PATCH`), starting at `0.x` until the first real release:
-  - **PATCH** (0.1.0 → 0.1.1): bug fixes, nothing new for users.
-  - **MINOR** (0.1.0 → 0.2.0): a new feature or screen, backwards compatible.
-  - **MAJOR** (0.x → 1.0.0, 1.x → 2.0.0): a breaking change (data, URLs, how people use it). 1.0.0 is the first launch to members.
+- **[Semantic Versioning](https://semver.org/)** (`MAJOR.MINOR.PATCH`), now at `1.0.0` (18 Oct 2026):
+  - **PATCH** (1.0.0 → 1.0.1): bug fixes, nothing new for users.
+  - **MINOR** (1.0.0 → 1.1.0): a new feature or screen, backwards compatible.
+  - **MAJOR** (1.x → 2.0.0): a breaking change (data, URLs, how people use it).
 - Every PR adds a line under `## [Unreleased]` in [CHANGELOG.md](CHANGELOG.md). Releases are tagged `vX.Y.Z`. Full steps: [CONTRIBUTING.md](CONTRIBUTING.md#5-versioning-and-releases).
 - Plain commit messages, no `Co-Authored-By` trailers.
 

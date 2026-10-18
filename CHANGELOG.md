@@ -4,9 +4,13 @@ All notable changes to Project Emerald. Versions follow [Semantic Versioning](ht
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-18
+
+First release.
+
 ### Added
 
-- **The app (v0.2.0, provisional stack):** a working, interactive build of every feature in the brief, with demo data: builders, profiles, projects (manual or imported from GitHub), launch and status, What I learned, updates, AMA with Helpful and save-as-snippet, the Learn grid (learnings, opinions, articles, videos with YouTube embeds, sources), comments and replies, sharer insights, likes, snippets with one-tap copy, the weekly/monthly/all-time leaderboard, 8 badges, notifications, search, presence, the paste check and pledge, and voice dictation where the browser supports it.
+- **The app (provisional stack):** a working, interactive build of every feature in the brief, with demo data: builders, profiles, projects (manual or imported from GitHub), launch and status, What I learned, updates, AMA with Helpful and save-as-snippet, the Learn grid (learnings, opinions, articles, videos with YouTube embeds, sources), comments and replies, sharer insights, likes, snippets with one-tap copy, the weekly/monthly/all-time leaderboard, 8 badges, notifications, search, presence, the paste check and pledge, and voice dictation where the browser supports it.
 - **Settings (click your avatar):** profile, hide online status, non-tech toggle; admin: Project of the Month, view as another member, export/import JSON, reset to demo data, delete all data.
 - Tests for the points engine and store (`pnpm test`), a Playwright run-through of every flow (`pnpm e2e`), and CI.
 - Refined product brief: scope, points table, GitHub sync, the "own words" approach, open questions.
