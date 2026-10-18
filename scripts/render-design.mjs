@@ -10,10 +10,13 @@ const storyboards = ["01-discover", "02-ship-and-share", "03-non-tech", "04-help
 const wireframes = ["01-sitemap", "02-flows", "03-home", "04-project", "05-builders-profile", "06-learn-snippets", "07-mobile"];
 const previews = [
   ["01-home", "home"], ["02-builders", "builders"], ["03-profile", "profile"], ["04-project", "project"], ["05-project-ama", "ama"],
-  ["06-learn", "learn"], ["07-snippets", "snippets"], ["08-leaderboard", "leaderboard"], ["09-share", "share"], ["10-write-learning", "write"],
+  ["06-learn", "learn"], ["07-article", "article"], ["08-snippets", "snippets"], ["09-leaderboard", "leaderboard"], ["10-share", "share"], ["11-write-learning", "write"],
 ];
-const mobile = [["11-mobile-home", "home"], ["12-mobile-project", "project"], ["13-mobile-ama", "ama"], ["14-mobile-learn", "learn"], ["15-mobile-leaderboard", "leaderboard"], ["16-mobile-share", "share"]];
-
+// Mobile = the same website in a phone browser (responsive), not a native app.
+const mobile = [
+  ["12-mobile-home", "home"], ["13-mobile-project", "project"], ["14-mobile-learn", "learn"], ["15-mobile-article", "article"],
+  ["16-mobile-leaderboard", "leaderboard"], ["17-mobile-share", "share"],
+];
 const jobs = {
   storyboards: storyboards.map((b) => ({ url: src("storyboards.html", `?b=${b}`), out: `storyboards/${b}.png`, width: 1600 })),
   wireframes: wireframes.map((w) => ({ url: src("wireframes.html", `?w=${w}`), out: `wireframes/${w}.png`, width: 1600 })),

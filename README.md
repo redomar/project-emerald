@@ -2,7 +2,7 @@
 
 > Working name. Rename the repo and this heading once the real name is agreed.
 
-One place for the brothers to see who is building what, what they shipped, and what they learned. Friendly, not GitHub. See the [brief](docs/product-brief.md) and the [design previews](design/README.md).
+One place for the brothers to see who is building what, what they shipped, and what they learned. Friendly, not GitHub. One responsive website: on phones it's the same site in the browser. See the [brief](docs/product-brief.md) and the [design previews](design/README.md).
 
 **Stack:** not chosen yet. Record the choice in [docs/decisions.md](docs/decisions.md), then fill this line in.
 

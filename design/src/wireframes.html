@@ -129,48 +129,49 @@ const pages = {};
 
 pages["01-sitemap"] = () => {
   const top = 150, X = (i) => 20 + i * 245;
-  const d = diagram({ w: 1488, h: 860, nodes: [
+  const d = diagram({ w: 1488, h: 940, nodes: [
     { id: "in", t: "Sign in", s: "GitHub or email · invite only", x: 649, y: 0, c: "root" },
     { id: "home", t: "Home", s: "Spotlight · feed · this week", x: X(0), y: top, c: "key" },
     { id: "bld", t: "Builders", s: "everyone, filter by stack", x: X(1), y: top, c: "key" },
     { id: "prj", t: "Projects", s: "Building · Launched · Done", x: X(2), y: top, c: "key" },
-    { id: "lrn", t: "Learn", s: "learnings · news · opinions", x: X(3), y: top, c: "key" },
+    { id: "lrn", t: "Learn", s: "grid: learnings · videos · articles", x: X(3), y: top, c: "key" },
     { id: "snp", t: "Snippets", s: "quick-copy library", x: X(4), y: top, c: "key" },
     { id: "lb", t: "Leaderboard", s: "weekly · badges", x: X(5), y: top, c: "key" },
     { id: "potm", t: "Project of the Month", s: "spotlight + past winners", x: X(0), y: 300 },
     { id: "feed", t: "Activity feed", s: "launches, learnings, badges", x: X(0), y: 390 },
+    { id: "who", t: "Who's around", s: "online · last 2 h · inactive", x: X(0), y: 570 },
     { id: "help", t: "Can you help?", s: "open AMA Qs for your stack", x: X(0), y: 480 },
     { id: "prof", t: "Profile", s: "projects · learnings · badges · streak", x: X(1), y: 300, h: 80 },
     { id: "page", t: "Project page", s: "Open app · stack · GitHub · What I learned", x: X(2), y: 300, h: 80 },
     { id: "ama", t: "AMA tab", s: "questions · Helpful answers", x: X(2), y: 420 },
     { id: "upd", t: "Updates tab", s: "synced from GitHub", x: X(2), y: 510 },
-    { id: "post", t: "Learning / article", s: "Written here mark · comments", x: X(3), y: 300, h: 80 },
+    { id: "post", t: "Post detail", s: "comments · sharer insights · sources", x: X(3), y: 300, h: 80 },
     { id: "snip", t: "Snippet", s: "copy · source answer", x: X(4), y: 300 },
     { id: "badges", t: "Badge gallery", s: "how to earn each", x: X(5), y: 300 },
     { id: "pts", t: "How points work", s: "transparent rules", x: X(5), y: 390 },
-    { id: "grpA", t: "Global", x: 20, y: 620, w: 960, h: 210, c: "group" },
-    { id: "add", t: "＋ Add", s: "on every screen", x: 50, y: 680, w: 170, c: "root" },
-    { id: "a1", t: "New project", s: "pick a GitHub repo", x: 260, y: 650, w: 170, h: 56 },
-    { id: "a2", t: "Write learning", s: "guided, own words", x: 450, y: 650, w: 170, h: 56 },
-    { id: "a3", t: "Share article", s: "link + your take", x: 640, y: 650, w: 170, h: 56 },
-    { id: "a4", t: "Add snippet", x: 260, y: 740, w: 170, h: 56 },
-    { id: "a5", t: "Ask a question", s: "on a project's AMA", x: 450, y: 740, w: 170, h: 56 },
-    { id: "a6", t: "Nominate POTM", s: "monthly", x: 640, y: 740, w: 170, h: 56 },
-    { id: "ntf", t: "Notifications", s: "answers · badges · recap", x: 1030, y: 650, w: 200 },
-    { id: "set", t: "Settings", s: "linked repos · profile · privacy", x: 1030, y: 740, w: 200 },
-    { id: "cal", t: "M Omar's calendar", s: "separate app: link only", x: 1268, y: 690, w: 200, c: "ext" },
+    { id: "grpA", t: "Global", x: 20, y: 700, w: 960, h: 210, c: "group" },
+    { id: "add", t: "＋ Add", s: "on every screen", x: 50, y: 760, w: 170, c: "root" },
+    { id: "a1", t: "New project", s: "pick a GitHub repo", x: 260, y: 730, w: 170, h: 56 },
+    { id: "a2", t: "Write learning", s: "guided, own words", x: 450, y: 730, w: 170, h: 56 },
+    { id: "a3", t: "Share a link", s: "article or video + take", x: 640, y: 730, w: 170, h: 56 },
+    { id: "a4", t: "Add snippet", x: 260, y: 820, w: 170, h: 56 },
+    { id: "a5", t: "Ask a question", s: "on a project's AMA", x: 450, y: 820, w: 170, h: 56 },
+    { id: "a6", t: "Nominate POTM", s: "monthly", x: 640, y: 820, w: 170, h: 56 },
+    { id: "ntf", t: "Notifications", s: "answers · badges · recap", x: 1030, y: 730, w: 200 },
+    { id: "set", t: "Settings", s: "linked repos · profile · privacy", x: 1030, y: 820, w: 200 },
+    { id: "cal", t: "M Omar's calendar", s: "separate app: link only", x: 1268, y: 770, w: 200, c: "ext" },
   ]});
   root.innerHTML = head("Sitemap", "wire diagram 1 · information architecture",
-    "Six top-level sections and one global <b>＋ Add</b> button. Everything a member creates starts from that button, so there's one habit to learn. The calendar stays a separate app and is only linked.")
+    "Six top-level sections and one global <b>＋ Add</b> button. Phones use the same website in the browser (responsive), not a separate app. Everything a member creates starts from that button, so there's one habit to learn. The calendar stays a separate app and is only linked.")
     + d.html + `<div class="legend"><span><i style="background:var(--emerald-soft);border-color:var(--emerald)"></i>Top-level nav</span><span><i></i>Screen / sub-view</span><span><i style="background:var(--wire-ink)"></i>Entry / action hub</span><span><i style="border-style:dashed"></i>Out of scope (link only)</span></div>`;
   const E = [["in", "home", "", { y: 110 }], ["in", "bld", "", { y: 110 }], ["in", "prj", "", { y: 110 }], ["in", "lrn", "", { y: 110 }], ["in", "snp", "", { y: 110 }], ["in", "lb", "", { y: 110 }],
-    ["home", "potm"], ["potm", "feed"], ["feed", "help"], ["bld", "prof"], ["prj", "page"], ["page", "ama"], ["ama", "upd"], ["lrn", "post"], ["snp", "snip"], ["lb", "badges"], ["badges", "pts"]];
+    ["home", "potm"], ["potm", "feed"], ["feed", "help"], ["help", "who"], ["bld", "prof"], ["prj", "page"], ["page", "ama"], ["ama", "upd"], ["lrn", "post"], ["snp", "snip"], ["lb", "badges"], ["badges", "pts"]];
   drawEdges(E);
   drawEdges([["add", "a1", "", { m: "h" }], ["add", "a4", "", { m: "h" }]]);
 };
 
 pages["02-flows"] = () => {
-  const d = diagram({ w: 1488, h: 1060, nodes: [
+  const d = diagram({ w: 1488, h: 1120, nodes: [
     { id: "f1", t: "Flow A · Add a project (low-effort GitHub sync)", x: 0, y: 0, w: 1488, h: 230, c: "group" },
     { id: "a1", t: "＋ Add → New project", x: 20, y: 70, w: 190, c: "root" },
     { id: "a2", t: "GitHub linked?", x: 260, y: 70, w: 170, c: "dec" },
@@ -197,22 +198,25 @@ pages["02-flows"] = () => {
     { id: "c5", t: "Save as snippet?", s: "optional, 1 tap", x: 1020, y: 620, w: 190 },
     { id: "c6", t: "Snippet library", x: 1260, y: 620, w: 200 },
 
-    { id: "f4", t: "Points engine · every action feeds one place", x: 0, y: 770, w: 1488, h: 290, c: "group" },
-    { id: "pg", t: "Actions", x: 8, y: 810, w: 520, h: 225, c: "group" },
+    { id: "f4", t: "Points engine · every action, including engagement, feeds one place", x: 0, y: 770, w: 1488, h: 350, c: "group" },
+    { id: "pg", t: "", x: 8, y: 810, w: 520, h: 290, c: "group" },
     { id: "p1", t: "Launch +50", x: 20, y: 830, w: 150, h: 48, c: "pt" },
     { id: "p2", t: "Learning +15", x: 190, y: 830, w: 150, h: 48, c: "pt" },
     { id: "p3", t: "Helpful +10", x: 360, y: 830, w: 150, h: 48, c: "pt" },
     { id: "p4", t: "Answer +5", x: 20, y: 900, w: 150, h: 48, c: "pt" },
     { id: "p5", t: "Snippet +5 · copies +1", x: 190, y: 900, w: 150, h: 48, c: "pt" },
     { id: "p6", t: "Article +5 (≤3/wk)", x: 360, y: 900, w: 150, h: 48, c: "pt" },
-    { id: "p7", t: "Coding day +3 (≤15/wk)", x: 20, y: 970, w: 320, h: 48, c: "pt" },
-    { id: "pe", t: "Contribution log", s: "one row per action · caps applied", x: 600, y: 880, w: 230, h: 76, c: "root" },
-    { id: "lb", t: "Weekly leaderboard", s: "resets Monday 00:00", x: 920, y: 820, w: 230, h: 70, c: "key" },
-    { id: "bd", t: "Milestone badges", s: "permanent", x: 920, y: 950, w: 230, h: 70, c: "key" },
-    { id: "rc", t: "Friday recap", s: "top 3 · new badges · POTM", x: 1230, y: 820, w: 230, h: 70 },
-    { id: "pr", t: "Profile", s: "badges + streak", x: 1230, y: 950, w: 230, h: 70 },
+    { id: "p8", t: "Comment +2", s: "max 10/wk", x: 20, y: 970, w: 150, h: 56, c: "pt" },
+    { id: "p9", t: "Insight +3", s: "on your own share", x: 190, y: 970, w: 150, h: 56, c: "pt" },
+    { id: "p10", t: "Comments in +1", s: "max 10/wk", x: 360, y: 970, w: 150, h: 56, c: "pt" },
+    { id: "p7", t: "Coding day +3 (≤15/wk)", x: 20, y: 1040, w: 320, h: 48, c: "pt" },
+    { id: "pe", t: "Contribution log", s: "one row per action · caps applied", x: 600, y: 915, w: 230, h: 76, c: "root" },
+    { id: "lb", t: "Weekly leaderboard", s: "resets Monday 00:00", x: 920, y: 850, w: 230, h: 70, c: "key" },
+    { id: "bd", t: "Milestone badges", s: "permanent", x: 920, y: 1000, w: 230, h: 70, c: "key" },
+    { id: "rc", t: "Friday recap", s: "top 3 · new badges · POTM", x: 1230, y: 850, w: 230, h: 70 },
+    { id: "pr", t: "Profile", s: "badges + streak", x: 1230, y: 1000, w: 230, h: 70 },
   ]});
-  root.innerHTML = head("User flows + points", "wire diagram 2 · flows", "The four loops the brief describes. Gold boxes are decisions. Every contribution writes one row to a single log, and the leaderboard and badges are both read from it.") + d.html;
+  root.innerHTML = head("User flows + points", "wire diagram 2 · flows", "The main loops from the brief. Gold boxes are decisions. Every contribution writes one row to a single log, and the leaderboard and badges are both read from it.") + d.html;
   drawEdges([
     ["a1", "a2", "", { m: "h" }], ["a2", "a3", "yes", { m: "h" }], ["a2", "a2b", "no"], ["a2b", "a3", "", { m: "h" }], ["a3", "a4", "", { m: "h" }], ["a4", "a5", "", { m: "h" }], ["a5", "a6", "", { m: "h" }],
     ["b1", "b2", "", { m: "h" }], ["b2", "b3", "", { m: "h" }], ["b3", "b4", "no", { m: "h" }], ["b3", "b3b", "yes"], ["b3b", "b4", "", { m: "h" }], ["b4", "b5", "", { m: "h" }], ["b5", "b6", "", { m: "h", dash: true }],
@@ -242,11 +246,14 @@ pages["03-home"] = () => {
       <div class="b">${m(5, -10, -10)}<div class="tabs"><span class="on">Everything</span><span>Launches</span><span>Learnings</span><span>News</span></div>
         ${[["H", "Hamza launched Receipt Snap", "React Native · Claude API · 2h"], ["Z", "Zayd wrote “SwiftUI widgets the easy way”", "Learning · 5 min read · Written here"], ["A", "Ahmed shared “New AI agents can now ship whole apps”", "News · with his take"], ["I", "Ibrahim earned 🤝 Helped 5 Bros", "Badge"]].map(([a, t, s]) => `<div class="row" style="padding:10px 0;border-bottom:1px solid #e3e3e3"><span class="av">${a}</span><div class="t">${t}<small>${s}</small></div></div>`).join("")}</div>
       <div class="col">
+        <div class="b">${m(8, -10, -10)}<h4>Who's around</h4><p style="margin-bottom:6px"><b>● Online now · 3</b></p><div class="row" style="gap:6px"><span class="av">MO</span><span class="av">Y</span><span class="av">A</span></div>
+          <p style="margin:8px 0 6px"><b>◐ Last 2 hours · 3</b> &nbsp;25 min · 1 h · 1 h 40</p><div class="row" style="gap:6px"><span class="av">I</span><span class="av">B</span><span class="av">H</span></div>
+          <p style="margin:8px 0 6px;color:#999"><b>○ Inactive · 2</b></p><div class="row" style="gap:6px;opacity:.45"><span class="av">Z</span><span class="av">ID</span></div></div>
         <div class="b" style="border-color:var(--emerald)">${m(6, -10, -10)}<h4>🙋 Can you help?</h4><p>2 open questions in Next.js</p><div class="b soft" style="margin-top:8px;padding:8px"><p><b>Bilal</b>: How do I protect admin routes in Masjid Rota?</p></div><span class="btn" style="margin-top:8px">Answer</span></div>
         <div class="b">${m(7, -10, -10)}<h4>Your next badge</h4><p>🔥 4-Week Streak: 3 of 4 weeks</p><div style="height:10px;border:1.5px solid #2b2b2b;border-radius:99px;margin-top:8px"><div style="width:75%;height:100%;background:#2b2b2b"></div></div></div>
       </div>
     </div>`,
-  [["Global ＋ Add", "Same button on every screen: project, learning, article, snippet, question."], ["Personal line", "One sentence of status. It nudges without nagging."], ["Project of the Month", "The biggest thing on the page. Open app goes straight to the live app."], ["This week", "Top 5 only, to keep it friendly. The full board is one tap away."], ["Feed", "Plain-language events, no commit hashes. Filter chips for builders vs readers."], ["Can you help?", "Open AMA questions matched to your stack. This is what makes helping visible."], ["Next badge", "Shows progress on the badge closest to unlocking."]]);
+  [["Global ＋ Add", "Same button on every screen: project, learning, article, snippet, question."], ["Personal line", "One sentence of status. It nudges without nagging."], ["Project of the Month", "The biggest thing on the page. Open app goes straight to the live app."], ["This week", "Top 5 only, to keep it friendly. The full board is one tap away."], ["Feed", "Plain-language events, no commit hashes. Filter chips for builders vs readers."], ["Can you help?", "Open AMA questions matched to your stack. This is what makes helping visible."], ["Next badge", "Shows progress on the badge closest to unlocking."], ["Who's around", "Online = active in the last 5 min · last 2 hours · inactive. Dots on every avatar, with a text label (not colour alone). Members can hide their status."]]);
 };
 
 pages["04-project"] = () => {
@@ -294,21 +301,24 @@ pages["05-builders-profile"] = () => {
 pages["06-learn-snippets"] = () => {
   root.innerHTML = head("Learn + snippets", "wireframe 6 · desktop", "Learn holds members' own words and shared news. Snippets is a copy-first library: the code is visible straight away and Copy is one tap.") + `<div class="g" style="grid-template-columns:1fr 1fr;gap:30px">
     <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">/learn</span></div><div class="page">${nav("Learn")}
-      <div class="tabs" style="position:relative">${m(1, -14, 2)}<span class="on">All</span><span>Learnings</span><span>Opinions</span><span>News</span></div>
+      <div class="tabs" style="position:relative;padding-left:20px">${m(1, -14, 2)}<span class="on">All</span><span>Learnings</span><span>Videos</span><span>Articles</span><span>Opinions</span></div>
       <div style="position:relative">${m(2, -14, -6)}<span class="chip">Flutter</span><span class="chip">AI tools</span><span class="chip">Deploying</span><span class="chip">Design</span><span class="chip">Career</span></div>
-      ${[["SwiftUI widgets the easy way", "Zayd · Learning · 5 min · ✍️ Written here", true], ["Why I stopped using Firebase for everything", "Bilal · Opinion · 3 min · ✍️ Written here", true], ["New AI agents can now ship whole apps", "Ahmed shared · The Verge · “Worth trying for our next hackathon”", false], ["What 3 weekends of Flutter taught me", "Yusuf · Learning · 4 min · ✍️ Written here", true]].map(([t, s, w], i) => `<div class="b" style="display:grid;grid-template-columns:${w ? "1fr" : "120px 1fr"};gap:12px;position:relative">${i === 2 ? m(3, -10, -10) : ""}${i === 0 ? m(4, -10, -10) : ""}${w ? "" : '<div class="ph" style="height:70px"></div>'}<div><h4>${t}</h4><p>${s}</p>${w ? lines(1, 80) : ""}</div></div>`).join("")}
+      <div class="g" style="grid-template-columns:repeat(3,1fr);gap:10px;position:relative">${m(3, -10, -10)}
+      ${[["✍️ Learning", "SwiftUI widgets the easy way", "📎 3 sources · ▶ 1", 0], ["▶ Video · 2:14", "Convex in 100 seconds", "Mohamed's take", 1], ["📰 Article", "New AI agents can ship whole apps", "💬 8 · 💡 2", 1], ["💬 Opinion", "Why I stopped using Firebase", "📎 2 sources", 0], ["✍️ Learning", "Shipping in 48 h with Convex", "📎 4 · ▶ 2", 0], ["▶ Video · 18:40", "WidgetKit timelines explained", "Yusuf's take", 1]].map(([k, t, f, th], i) => `<div class="b" style="height:168px;padding:0;overflow:hidden;display:flex;flex-direction:column;position:relative">${i === 1 ? m(4, -8, -8) : ""}${th ? '<div class="ph" style="height:58px;border-radius:0;display:grid;place-items:center;font-size:18px">' + (k.startsWith("▶") ? "▶" : "") + '</div>' : '<div style="height:5px;background:#2b2b2b"></div>'}<div style="padding:8px 10px;display:flex;flex-direction:column;gap:4px;flex:1"><span class="chip" style="align-self:flex-start;font-size:10.5px">${k}</span><div class="t" style="font-size:12.5px">${t}</div>${th ? "" : lines(1, 80)}<p style="margin-top:auto;font-size:11px">${f}</p></div></div>`).join("")}
+      </div>
+      <p style="text-align:center;font-size:12px">↑ fixed-height cards: two full rows (8 at desktop width) above the fold</p>
     </div></div>
     <div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">/snippets</span></div><div class="page">${nav("Snippets")}
       <div class="row" style="position:relative">${m(5, -14, -10)}<div class="b soft" style="flex:1;padding:8px 12px"><p>🔍 Search “debounce”, “auth”, “supabase”…</p></div></div>
       <div><span class="chip">All</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Flutter</span><span class="chip">SQL</span><span class="chip">Shell</span></div>
       ${[["useDebounce hook", "Hamza · TypeScript · copied 31×", "export function useDebounce(v, ms = 300) {<br>&nbsp;&nbsp;const [d, setD] = useState(v)<br>&nbsp;&nbsp;…"], ["Admin-only middleware", "Ibrahim · Next.js · from an AMA answer · copied 12×", "export function middleware(req) {<br>&nbsp;&nbsp;if (!isAdmin(req)) return deny()<br>}"], ["Supabase RLS for owners", "Bilal · SQL · copied 8×", "create policy \"owner\" on items<br>&nbsp;&nbsp;using (auth.uid() = user_id);"]].map(([t, s, c], i) => `<div class="b" style="position:relative">${i === 0 ? m(6, -10, -10) : ""}${i === 1 ? m(7, -10, -10) : ""}<div class="row" style="justify-content:space-between;margin-bottom:8px"><div class="t">${t}<small>${s}</small></div><span class="btn p">Copy</span></div><div class="code">${c}</div></div>`).join("")}
     </div></div></div>
-    <div class="notes" style="margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 30px">${[["Types as tabs", "Learnings, Opinions, News. Readers pick the mood."], ["Topic chips", "Topics, not repos. Friendly for non-tech readers."], ["News card", "The article preview plus the sharer's own take in quotes. A take is required."], ["Written here", "Shown on posts written in Emerald's editor."], ["Search first", "Most visits are “I need that thing again”."], ["Copy is primary", "Code visible straight away, no clicking through. The copy count is social proof."], ["Source link", "Snippets saved from an AMA answer link back to the question."]].map(([t, s], i) => `<div><span class="k">${i + 1}</span><span><b>${t}</b>${s}</span></div>`).join("")}</div>`;
+    <div class="notes" style="margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 30px">${[["Types as tabs", "Learnings, Videos, Articles, Opinions."], ["Topic chips", "Topics, not repos. Friendly for non-tech readers."], ["Card grid", "Fixed-height cards so many items fit on one screen. Learnings show their attached sources and videos."], ["Video card", "Thumbnail, duration, the sharer's take. Opens a detail page with comments and the sharer's insights."], ["Search first", "Most visits are “I need that thing again”."], ["Copy is primary", "Code visible straight away, no clicking through. The copy count is social proof."], ["Source link", "Snippets saved from an AMA answer link back to the question."]].map(([t, s], i) => `<div><span class="k">${i + 1}</span><span><b>${t}</b>${s}</span></div>`).join("")}</div>`;
 };
 
 pages["07-mobile"] = () => {
   const tb = (on) => `<div class="tabbar">${["Home", "Builders", "", "Learn", "Board"].map((t) => `<span class="${t === "" ? "plus" : ""} ${t && t === on ? "on" : ""}">${t || "Add"}</span>`).join("")}</div>`;
-  root.innerHTML = head("Mobile", "wireframe 7 · phone", "Most people will open Emerald from the group chat on their phone. The tab bar has the same five places, with ＋ Add in the middle.") + `<div class="phones">
+  root.innerHTML = head("Mobile web", "wireframe 7 · same site in a phone browser", "Not a separate app: the same website, laid out for a phone's browser. Most people will open it from the group chat link. The bottom tab bar has the same five places, with ＋ Add in the middle.") + `<div class="phones">
     <div class="ph-w"><div class="phone"><div class="t" style="font:800 20px var(--display)">Salam, Bilal<small>#9 this week · 🔥 2 weeks</small></div>
       <div class="b"><span class="chip">⭐ Project of the Month</span><div class="ph" style="height:110px;margin:8px 0"></div><h4>Salah Buddy</h4><p>Yusuf · Flutter</p><span class="btn p" style="width:100%;margin-top:8px">Open app ↗</span></div>
       <div class="b soft"><h4>This week</h4><p>1 Yusuf 86 · 2 Ibrahim 61 · 3 Mohamed 54</p></div>
@@ -321,7 +331,7 @@ pages["07-mobile"] = () => {
       ${tb("")}</div><span>Project</span></div>
     <div class="ph-w"><div class="phone"><div class="t" style="font:800 20px var(--display)">Learn</div>${lines(3)}<div class="b soft"><h4>…</h4>${lines(2)}</div>
       <div class="sheet"><div class="grab"></div><div style="font:800 18px var(--display)">What do you want to add?</div>
-      ${[["📰", "Share an article", "Link + your take · +5"], ["✍️", "Write a learning", "Guided · +15"], ["🚀", "New project", "From GitHub"], ["🧩", "Add a snippet", "+5"], ["❓", "Ask a question", "On a project"]].map(([i, t, s]) => `<div class="row b" style="padding:9px 12px"><span style="font-size:20px">${i}</span><div class="t">${t}<small>${s}</small></div></div>`).join("")}</div></div><span>＋ Add sheet</span></div>
+      ${[["🔗", "Share a link", "Article or video + your take · +5"], ["✍️", "Write a learning", "Guided · +15"], ["🚀", "New project", "From GitHub"], ["🧩", "Add a snippet", "+5"], ["❓", "Ask a question", "On a project"]].map(([i, t, s]) => `<div class="row b" style="padding:9px 12px"><span style="font-size:20px">${i}</span><div class="t">${t}<small>${s}</small></div></div>`).join("")}</div></div><span>＋ Add sheet</span></div>
     <div class="ph-w"><div class="phone"><div class="t" style="font:800 20px var(--display)">This week<small>Resets Monday · 2 days left</small></div>
       <div class="row" style="justify-content:center;gap:16px;align-items:flex-end;margin:8px 0">${[["I", 2, 70], ["Y", 1, 96], ["MO", 3, 54]].map(([a, r, hgt]) => `<div style="text-align:center"><span class="av" style="margin:0 auto 4px">${a}</span><div style="width:60px;height:${hgt}px;border:1.8px solid #2b2b2b;border-radius:8px 8px 0 0;background:#eee;font:800 20px/${hgt}px var(--display)">${r}</div></div>`).join("")}</div>
       ${[["4", "Ahmed", 35], ["5", "Zayd", 30], ["6", "Hamza", 22], ["9", "You · Bilal", 12]].map(([r, n, p]) => `<div class="row b soft" style="justify-content:space-between;padding:8px 12px"><span class="t">${r}. ${n}</span><b>${p}</b></div>`).join("")}
